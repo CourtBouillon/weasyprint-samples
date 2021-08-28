@@ -1,0 +1,255 @@
+@font-face {
+  font-family: OpenDyslexic;
+  font-weight: bold;
+  src: url(fonts/OpenDyslexic-Bold.otf);
+}
+@font-face {
+  font-family: OpenDyslexic;
+  font-weight: normal;
+  src: url(fonts/OpenDyslexic-Regular.otf);
+}
+
+@page {
+  margin: 2cm 2cm 3cm 2cm;
+  size: 148mm 210mm;
+}
+
+@page :left {
+  @bottom-left {
+    content: counter(page);
+    position: absolute;
+    z-index: -1;
+  }
+  @bottom-right {
+    content: string(heading);
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+@page :right {
+  @bottom-left {
+    content: string(heading);
+    position: absolute;
+    z-index: -1;
+  }
+  @bottom-right {
+    content: counter(page);
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+@page full {
+  @bottom-right {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
+
+  background: black;
+  margin: 0;
+}
+
+@page :blank {
+  @bottom-right {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
+}
+
+@page clean {
+  @bottom-right {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
+}
+
+html {
+  counter-reset: h2-counter;
+  font-family: OpenDyslexic;
+  font-size: 10pt;
+}
+body {
+  margin: 0;
+}
+
+p {
+  line-height: 2;
+  text-align: justify;
+}
+img {
+  display: block;
+  margin: 2em auto;
+  max-width: 70%;
+}
+
+h1 {
+  display: none;
+}
+h2 {
+  color: white;
+  counter-increment: h2-counter;
+  display: flex;
+  flex-direction: column;
+  font-family: OpenDyslexic;
+  font-size: 3em;
+  height: 6cm;
+  justify-content: flex-end;
+  margin: 0;
+  string-set: heading content();
+  text-align: center;
+}
+h2::before {
+  content: "Chapitre " counter(h2-counter) " ";
+  display: block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  line-height: 1;
+}
+
+section {
+  break-after: right;
+}
+
+aside {
+  display: flex;
+  justify-content: center;
+}
+aside figure {
+  flex: none;
+  margin: 0;
+  padding: 1em;
+  text-align: center;
+}
+aside img {
+  border: 0.4mm solid white;
+  border-radius: 50%;
+  margin: 0 auto;
+  max-width: 14mm;
+}
+
+.character {
+  break-after: avoid;
+  margin: auto;
+  max-width: 14mm;
+}
+
+#authors {
+  padding-top: 10em;
+  page: clean;
+  text-align: center;
+}
+#authors img {
+  display: block;
+  margin: auto;
+  width: 75%;
+}
+#authors p {
+  font-size: 1.3em;
+  margin: 5em 0 1em;
+  text-align: center;
+}
+#authors dl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#authors dt {
+  display: block;
+  font-size: 0.8em;
+  line-height: 2rem;
+  width: 100%;
+}
+#authors dd {
+  margin: 0 0.5em;
+  padding: 0;
+}
+
+#contents {
+  page: clean;
+}
+#contents p {
+  font-size: 2em;
+}
+#contents ul {
+  display: block;
+  margin: 1em 0;
+  padding: 0;
+}
+#contents li {
+  display: block;
+}
+#contents a {
+  color: inherit;
+  text-decoration: none;
+}
+#contents a::before {
+  content: target-counter(attr(href), h2-counter) '. ' target-text(attr(href));
+}
+#contents a::after {
+  content: target-counter(attr(href), page);
+  float: right;
+}
+
+.chapitre::before {
+  background: center / cover;
+  border-radius: 0 0 50% 50% / 0 0 15mm 15mm;
+  content: "";
+  display: block;
+  height: 90mm;
+  left: -30mm;
+  position: absolute;
+  top: -20mm;
+  width: 168mm;
+  z-index: -1;
+}
+#chapitre-1::before {
+  background-image: url("img/couv1.jpg");
+}
+#chapitre-2::before {
+  background-image: url("img/couv2.jpg");
+}
+#chapitre-3::before {
+  background-image: url("img/couv3.jpg");
+}
+#chapitre-4::before {
+  background-image: url("img/couv4.jpg");
+}
+
+.outro {
+  border-radius: 50% 50% 0 0 / 15mm 15mm 0 0;
+  display: block;
+  height: 90mm;
+  left: -30mm;
+  max-width: none;
+  object-fit: cover;
+  position: absolute;
+  top: 120mm;
+  width: 168mm;
+  z-index: -1;
+}
+
+.fullpage img {
+  bottom: 0;
+  height: 210mm;
+  left: 0;
+  margin: 0;
+  max-width: none;
+  object-fit: cover;
+  page: full;
+  position: absolute;
+  width: 148mm;
+  z-index: 1;
+}
+.fullpage:last-child {
+  break-before: left;
+}
