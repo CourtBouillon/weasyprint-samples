@@ -1,0 +1,123 @@
+@font-face {
+  font-family: Pacifico;
+  src: url(pacifico.ttf);
+}
+@font-face {
+  font-family: Source Sans Pro;
+  font-weight: 400;
+  src: url(sourcesanspro-regular.otf);
+}
+@font-face {
+  font-family: Source Sans Pro;
+  font-weight: 700;
+  src: url(sourcesanspro-bold.otf);
+}
+
+@page {
+  font-family: Pacifico;
+  margin: 3cm;
+  @bottom-left {
+    color: #1ee494;
+    content: '♥ Thank you!';
+  }
+  @bottom-right {
+    color: #a9a;
+    content: 'contact@cortbouillon.org | courtbouillon.org';
+    font-size: 9pt;
+  }
+}
+
+html {
+  color: #14213d;
+  font-family: Source Sans Pro;
+  font-size: 11pt;
+  line-height: 1.6;
+}
+body {
+  margin: 0;
+}
+
+h1 {
+  color: #1ee494;
+  font-family: Pacifico;
+  font-size: 40pt;
+  margin: 0;
+}
+
+aside {
+  display: flex;
+  margin: 2em 0 4em;
+}
+aside address {
+  font-style: normal;
+  white-space: pre-line;
+}
+aside address#from {
+  color: #a9a;
+  flex: 1;
+}
+aside address#to {
+  text-align: right;
+}
+
+dl {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}
+dt, dd {
+  display: inline;
+  margin: 0;
+}
+dt {
+  color: #a9a;
+}
+dt::before {
+  content: '';
+  display: block;
+}
+dt::after {
+  content: ':';
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  border-bottom: .2mm solid #a9a;
+  color: #a9a;
+  font-size: 10pt;
+  font-weight: 400;
+  padding-bottom: .25cm;
+  text-transform: uppercase;
+}
+td {
+  padding-top: 7mm;
+}
+td:last-of-type {
+  color: #1ee494;
+  font-weight: bold;
+  text-align: right;
+}
+th, td {
+  text-align: center;
+}
+th:first-of-type, td:first-of-type {
+  text-align: left;
+}
+th:last-of-type, td:last-of-type {
+  text-align: right;
+}
+table#total {
+  background: #f6f6f6;
+  border-color: #f6f6f6;
+  border-style: solid;
+  border-width: 2cm 3cm;
+  bottom: 0;
+  font-size: 20pt;
+  margin: 0 -3cm;
+  position: absolute;
+  width: 18cm;
+}

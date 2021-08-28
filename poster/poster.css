@@ -1,0 +1,65 @@
+@import url(common.css);
+
+@page {
+  margin: 10mm;
+  size: 278mm 388mm;
+}
+
+#logo {
+  left: 1.8cm;
+  top: 2cm;
+  width: 87%;
+}
+
+#top-line {
+  font-size: 2.9em;
+  margin-top: 0.6cm;
+}
+
+#main-title {
+  font-size: 2.5em;
+  margin-top: 20cm;
+}
+#main-title p {
+  padding: 0.35cm;
+}
+#main-title p:last-of-type {
+  margin-left: 0.3cm;
+}
+
+#description {
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  margin-left: 1cm;
+  margin-top: 2cm;
+  margin-bottom: 0.2cm;
+}
+
+#date article {
+  margin-left: 1cm;
+}
+#date article:first-child > p:first-child {
+  font-size: 4.4em;
+}
+#date article:first-child > p:last-of-type {
+  font-size: 7em;
+}
+#date article:last-of-type > p:first-child {
+  font-size: 3.2em;
+}
+#date article:last-of-type > p:last-of-type {
+  font-size: 8em;
+}
+
+#sponsors{
+  margin-top: 1.2cm;
+}
+#sponsors img {
+  max-height: 60px;
+  max-width: 150px;
+}
+
+#address {
+  font-weight: lighter;
+  margin-left: 0.8cm;
+}

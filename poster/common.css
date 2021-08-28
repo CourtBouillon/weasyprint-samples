@@ -1,0 +1,51 @@
+@font-face {
+  font-family: ArchivoBlack;
+  src: url(archivoblack-regular.ttf);
+}
+
+html {
+  background: url(background.jpg);
+  background-size: cover;
+  font-family: ArchivoBlack;
+  color: white;
+  text-transform: uppercase;
+}
+
+#logo {
+  position: absolute;
+  z-index: -1;
+}
+
+#main-title p {
+  background-color: black;
+  display: inline;
+}
+
+#date {
+  border: 4px solid white;
+  padding-top: 0.5cm;
+  padding-bottom: 0.5cm;
+}
+#date article {
+  display: inline-block;
+}
+#date article p {
+  margin: 0;
+}
+
+#sponsors ul {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+#sponsors li {
+  margin: 0 1em;
+}
+
+#address {
+  letter-spacing: 0.15rem;
+  text-transform: none;
+}
