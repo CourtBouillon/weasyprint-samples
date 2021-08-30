@@ -1,6 +1,6 @@
 This repository contains samples for WeasyPrint (https://github.com/Kozea/WeasyPrint/).
 
-Samples book, cards, letter and poster have been designed by Madcats (https://madcats.fr/).
+Samples book, letter and poster have been designed by Madcats (https://madcats.fr/).
 
 The fonts used have their own licence.
 
