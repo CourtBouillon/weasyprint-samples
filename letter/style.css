@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "pacifico";
+  src: url("fonts/Pacifico-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "soon";
+  src: url("fonts/ComingSoon-Regular.ttf") format('truetype');
+}
+
+@page {
+  margin: 0;
+  size: A4;
+}
+
+body {
+  font-family: "soon";
+  margin: 0;
+}
+
+header {
+  background: no-repeat top left / 125% url('img/image-couleurs.png');
+}
+
+header div {
+  height: 3cm;
+  padding: 5mm 5mm 12mm 5mm;
+}
+
+header img {
+  width: 5cm;
+}
+
+hr {
+  border-top: 3px dashed gray;
+  border-bottom: none;
+  margin: 5mm 0;
+}
+
+p {
+  font-family: serif;
+  line-height: 18pt;
+  margin-top: 5mm;
+}
+
+body > div {
+  margin: 0 auto;
+  padding: 0 12mm;
+}
+
+body > div:first-of-type, body > div:last-of-type {
+  margin: 2cm 0 1cm 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 2mm;
+}
+
+legend {
+  font-family: "pacifico", serif;
+  font-size: 18pt;
+  margin-bottom: 5mm;
+}
+
+input {
+  height: 1.5em;
+}
+
+textarea {
+  height: 4em;
+}
+
+input, textarea {
+  display: block;
+}
+
+input::before, textarea::before, textarea::after {
+  content: leader(dotted);
+  display: block;
+}
+
+footer p {
+  text-align: center;
+}
+
+@media print {
+  input[type="submit"] {
+    display: none;
+  }
+}
