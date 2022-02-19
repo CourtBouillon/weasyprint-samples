@@ -104,12 +104,15 @@ h3 {
 h4 {
   font-size: 13pt;
 }
-
-#cover {
+#cover .addresses {
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right: 0;
+  height: auto;
   align-content: space-between;
   display: flex;
   flex-wrap: wrap;
-  height: 297mm;
 }
 #cover address {
   background: #fbc847;
