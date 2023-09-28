@@ -18,6 +18,16 @@ How to generate PDF from the samples?
 
     weasyprint report/report.html document.pdf
 
+Professional Support
+--------------------
+
+Professional support is provided by CourtBouillon (https://courtbouillon.org).
+
+* Bug fix
+* New feature
+* Templating
+* Workflow integration
+
 License
 -------
 
