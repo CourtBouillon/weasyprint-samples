@@ -110,6 +110,11 @@ th:first-of-type, td:first-of-type {
 th:last-of-type, td:last-of-type {
   text-align: right;
 }
+footer {
+  content: '';
+  display: block;
+  height: 6cm;
+}
 table#total {
   background: #f6f6f6;
   border-color: #f6f6f6;
