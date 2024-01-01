@@ -5,13 +5,30 @@
   <title>Invoice</title>
   <meta name="description" content="Hisab invoice demo sample">
   <style>
+
+    @font-face {
+      font-family: Roboto;
+      src: url(roboto-black.ttf);
+    }
+    @font-face {
+      font-family: Roboto;
+      font-weight: 700;
+      src: url(roboto-bold.otf);
+    }
+
     @page {
-      margin: 0;
+      font-family: Roboto;
+      margin: 24px;
+      border: 1px solid;
+
       @bottom-left {
         content: 'Generated using: https://hisab.co';
+        font-weight: 600;
       }
+
       @bottom-right {
         content: "Page " counter(page) " of " counter(pages);
+        font-weight: 600;
       }
     }
 
@@ -22,20 +39,15 @@
     }
 
     body {
-      margin: 24px;
-      border: 1px solid;
+      margin: 0px;
     }
 
     .company-details {
-      /* display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; */
       border-bottom: 1px solid;
       padding: 8px 4px 4px 4px;
     }
 
-    .company-details > * {
+    .company-details>* {
       text-align: center;
     }
 
@@ -79,12 +91,12 @@
     .billed-to-and-invoice-basic-details .invoice {
       min-width: 170px;
     }
-    
-    .billed-to-and-invoice-basic-details .invoice > * {
+
+    .billed-to-and-invoice-basic-details .invoice> * {
       display: flex;
       padding: 6px 8px;
     }
-    
+
     .billed-to-and-invoice-basic-details .invoice .title {
       justify-content: center;
       align-items: center;
@@ -106,6 +118,188 @@
     .billed-to-and-invoice-basic-details .invoice .date {
       padding-top: 0px;
       padding-bottom: 0px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .header th,
+    .items td,
+    .total-qty td,
+    .net-amount-container td,
+    .Bank td,
+    .terms th,
+    .terms td,
+    .receivers-container td,
+    .tds td {
+      text-align: right;
+      padding-right: 4px;
+      vertical-align: top;
+      border: 1px solid black;
+    }
+
+    .header .item-lable {
+      border-left: 0px;
+      text-align: start;
+    }
+
+    .header .empty,
+    .items .item-number {
+      border-right: 0px;
+    }
+
+    .border-left-none {
+      border-left: none !important;
+    }
+
+    .border-right-none {
+      border-right: none !important;
+    }
+
+    .items td {
+      padding-top: 10px;
+    }
+
+    .items .item-name {
+      text-align: justify;
+    }
+
+    .items .item-number {
+      text-align: justify;
+      padding-left: 4px;
+    }
+
+    .items .item-name {
+      border-left: 0px;
+    }
+
+    .table-1 tbody::after {
+      content: "";
+      display: inline-block;
+      vertical-align: top;
+      min-height: 300px;
+    }
+
+    .total-qty .qty,
+    .net-amount-container .net-amount-word,
+    .Bank .bank-detail {
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .net-amount-container td,
+    .Bank td {
+      padding: 4px;
+    }
+
+    .net-amount-container .amount {
+      border-left: 0;
+      text-align: left;
+      padding-top: 20px;
+    }
+
+    .net-amount-container .net-amount-lable,
+    .net-amount-container .net-amount,
+    .Bank .net-amount-lable {
+      padding-top: 20px;
+      border-bottom: 0;
+    }
+
+    .Bank .net-amount-empty {
+      border-top: 0;
+    }
+
+    .terms .details,
+    .terms .title,
+    .terms th {
+      text-align: left;
+      padding-left: 10px;
+      border-top: 0px;
+      border-bottom: 0px;
+    }
+
+    .terms .detail {
+      text-align: left;
+      border-top: 0px;
+      padding-left: 10px;
+      border-bottom: 0px;
+    }
+
+    .terms .authorised,
+    .terms .signature {
+      text-align: center;
+    }
+
+    .receivers-container td,
+    .header th {
+      border-top: 0px;
+    }
+
+    .receivers-container .receivers,
+    .receivers-container .authorised {
+      text-align: center;
+      border-top: 1px solid;
+      padding: 0 10px;
+    }
+
+    .total-qty td {
+      border-bottom: 0;
+    }
+
+    .tds td {
+      text-align: right;
+    }
+
+    .Bank .net-payable,
+    .net-amount-container .net-amount,
+    .tds .tds-amount {
+      text-align: left;
+      border-left: 0;
+      padding-left: 10px;
+    }
+
+    .tds .tds-lable,
+    .Bank .net-payable-lable,
+    .net-amount-container .net-amount-lable,
+    .tds .tds-amount {
+      border-right: 0;
+    }
+
+    .tds .tds-lable,
+    .Bank .net-payable-lable,
+    .tds .tds-amount,
+    .tds .tds-lable,
+    .Bank .net-payable,
+    .Bank .net-payable-lable,
+    .tds .tds-amount {
+      padding-top: 10px;
+    }
+
+    .tds td,
+    .Bank .net-payable-lable,
+    .Bank .net-payable {
+      border-top: 0;
+    }
+
+    .net-amount-container td,
+    .tds td {
+      border-bottom: 0;
+    }
+
+    .title {
+      padding: 10px 0 8px 0;
+    }
+
+    .Bank .bank-detail {
+      padding: 10px 0 8px 10px;
+    }
+
+    .terms .details,
+    .terms .detail,
+    .bank-detail {
+      font-size: 14px;
     }
   </style>
 </head>
@@ -136,6 +330,105 @@
       </div>
     </div>
   </div>
+  <table class="table-1">
+    <colgroup>
+      <col style="width: 2%;">
+      <col style="width: 48%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+    </colgroup>
+
+    <thead>
+      <tr class="header">
+        <th class="empty item-number border-left-none"></th>
+        <th class="item-lable" colspan="2"> Item</th>
+        <th class="qut-lable">Qty</th>
+        <th class="rate">Rate</th>
+        <th class="discount">Discount</th>
+        <th class="total border-right-none">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="items">
+        <td class="item-number border-left-none">1</td>
+        <td class="item-name" colspan="2">Software Development</td>
+        <td class="qut-lable">1 Month</td>
+        <td class="rate">91,200.00</td>
+        <td class="discount">0.00</td>
+        <td class="total border-right-none">91,200.00</td>
+      </tr>
+
+    <tfoot>
+      <tr class="total-qty">
+        <td colspan="3" class="border-left-none"><b>Total qty</b></td>
+        <td colspan="4" class="qty border-right-none"><b>1 (Month)</b></td>
+      </tr>
+    </tfoot>
+    </tbody>
+  </table>
+
+  <table>
+    <colgroup>
+      <col style="width: 2%;">
+      <col style="width: 48%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+    </colgroup>
+
+    <tr class="net-amount-container">
+      <td colspan="4" class="net-amount-word border-left-none"><b>Net payable in words</b> <br>Eighty Two Thousand Eighty Rupees
+        Only</td>
+      <td colspan="2" class="net-amount-lable">Net amount</td>
+      <td colspan="1" class="net-amount border-right-none"><b>91,200.00</b></td>
+    </tr>
+
+    <tr class="tds">
+      <td colspan="4" class="tds-empty border-left-none"></td>
+      <td colspan="2" class="tds-lable">TDS(10%)</td>
+      <td colspan="1" class="tds-amount border-right-none">-9,120.00</td>
+    </tr>
+
+    <tr class="Bank">
+      <td colspan="4" class="bank-detail border-left-none"><b>Bank detail</b> <br> Bank:, A/C Name: ABC LTD,<br> A/C number:
+        123456789, iFSC cod:00051721</td>
+      <td colspan="2" class="net-payable-lable">Net payable</b></td>
+      <td colspan="1" class="net-payable border-right-none"><b>81,080.00</b></td>
+    </tr>
+
+    <tr class="terms">
+      <th colspan="2" class="title border-left-none">Terms and Conditions </th>
+      <th colspan="2" rowspan="4"></th>
+      <th colspan="2" rowspan="4"></th>
+      <th colspan="1" rowspan="4" class="border-right-none"></th>
+    </tr>
+
+    <tr class="terms">
+      <td class="details border-left-none" colspan="2">(1) Goods once sold will not be accepted return</td>
+    </tr>
+    <tr class="terms">
+      <td class="details border-left-none" colspan="2">(2) In case of late payment interest 18% p.a. will be levied</td>
+    </tr>
+    <tr class="terms">
+      <td class="detail border-left-none" colspan="2">(3) Subject to Surat Jurisdiction. E & O.E</td>
+    </tr>
+
+    <tr class="receivers-container">
+      <td colspan="2" class="empty border-left-none"></td>
+      <td colspan="2">
+        <div class="receivers">Receiver's Signature </div>
+      </td>
+      <td colspan="2">
+        <div class="authorised"> Authorised Signature </div>
+      </td>
+      <td colspan="1" class="border-right-none"> </td>
+    </tr>
+  </table>
 </body>
 
 </html>
