@@ -1,38 +1,10 @@
-@page {
-  margin: 16px;
-  @bottom-left {
-    content: 'Generated using: https://hisab.co';
-  }
-  @bottom-right {
-    content: "Page " counter(page) " of " counter(pages);
-  }
+@font-face {
+  font-family: Roboto;
+  src: url(Roboto-Regular.ttf);
 }
 
-html {
-  margin: 0;
-  color: rgba(0,0,0,.87);
-  font-size: 14px;
-}
-
-body {
-  margin: 0;
-  border: 1px solid rgba(0,0,0,.87);
-}
-
-.company-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgba(0,0,0,.87);
-}
-
-.company-details .name,
-.company-details .addres {
-  flex: 1;
-}
-
-.company-details .name {
-  font-size: 32px;
+@font-face {
+  font-family: Roboto;
+  src: url(Roboto-Bold.ttf);
   font-weight: 600;
 }
