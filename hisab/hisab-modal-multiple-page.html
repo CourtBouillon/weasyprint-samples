@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="hisab.css" media="print" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> pdf 7 </title>
+    <style>
+        @page {
+            font-family: Roboto;
+            margin: 24px;
+
+            @bottom-left {
+                content: 'Generated using: https://hisab.co';
+                font-weight: 600;
+            }
+
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-weight: 600;
+            }
+        }
+
+        html {
+            margin: 0;
+            color: rgba(0, 0, 0, .87);
+            font-size: 14px;
+            font-family: Roboto;
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        .company-details {
+            border-bottom: 1px solid;
+            padding: 8px 4px 4px 4px;
+        }
+
+        .company-details>* {
+            text-align: center;
+        }
+
+        .company-details .name {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details {
+            display: flex;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to {
+            flex: 1;
+            padding: 6px 8px;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to .label {
+            margin-right: 12px;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to .value .name {
+            padding-top: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice {
+            min-width: 170px;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice>* {
+            display: flex;
+            padding: 6px 8px;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .title {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .label {
+            min-width: 90px;
+            margin-right: 4px;
+            display: flex;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .value {
+            white-space: nowrap;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .number,
+        .billed-to-and-invoice-basic-details .invoice .date {
+            justify-content: space-between;
+            padding-top: 0px;
+            padding-bottom: 10px;
+        }
+
+        .contact-details {
+            font-size: 16px;
+            padding-top: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        col {
+            padding-right: 4px;
+        }
+
+        .table-1 tbody::after {
+            content: "";
+            display: inline-block;
+            vertical-align: top;
+            min-height: 300px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            vertical-align: top;
+            border-right: 0;
+            border-left: 0;
+        }
+
+        .br-0 {
+            border-right: 0px;
+        }
+
+        .bl-0 {
+            border-left: 0px;
+        }
+
+        .bb-0 {
+            border-bottom: 0px;
+        }
+
+        .bt-0 {
+            border-top: 0px;
+        }
+
+        .email {
+            text-align: center;
+        }
+
+        .email {
+            padding-bottom: 20px;
+        }
+
+        .billed {
+            padding-top: 10px;
+        }
+
+        .items .item-name,
+        .items .item-number,
+        .header .item-lable {
+            text-align: left;
+        }
+
+        .invoice-nu,
+        .date,
+        .due,
+        .invoice,
+        .items td,
+        .header th,
+        .total-qty-lable,
+        .total-due,
+        .total-due-amount,
+        .net-amount,
+        .amount {
+            text-align: right;
+        }
+
+        .header th {
+            border-bottom: 5px solid black;
+            padding: 0 4px;
+        }
+
+        .items td {
+            padding: 10px 4px;
+        }
+
+        .total-qty-lable {
+            padding-right: 10px;
+        }
+
+        .footer td {
+            border: 0;
+        }
+
+        .net-amount-word {
+            padding-top: 10px;
+        }
+
+        .net-amount,
+        .amount {
+            vertical-align: middle;
+        }
+
+        .qr-info {
+            text-align: center;
+        }
+
+        .receivers-lable,
+        .authorised-lable {
+            text-align: center;
+            border-top: 1px solid black;
+            margin: 0 4px;
+        }
+
+        .footer .receivers-lable,
+        .footer .receivers,
+        .footer .authorised-lable,
+        .footer .authorised {
+            text-align: center;
+        }
+
+        .receivers {
+            vertical-align: middle;
+        }
+
+        .total-amount,
+        .due-amount {
+            padding-top: 10px;
+            text-align: right;
+        }
+
+        .amount,
+        .net-amount {
+            padding-top: 10px;
+        }
+
+        .due-amount,
+        .amount {
+            padding-right: 8px;
+        }
+
+        .qr-code {
+            text-align: center;
+        }
+
+        .footer-table td {
+            padding-left: 4px;
+        }
+
+        .terms-conditions,
+        .bank-detail {
+            padding: 10px 0;
+        }
+
+        .scan-code {
+            padding-bottom: 8px;
+        }
+
+        .receivers-lable {
+            padding-bottom: 10px;
+        }
+
+        .authorised-logo,
+        .receivers-logo {
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="company-details">
+        <div class="name">Monek vaghani</div>
+        <div class="address">c-2, 202, abhinandan residency sarthana, surat, 395006, gujarat</div>
+        <div class="mobile"> Phone. 9662350755 | <span>Email: monek@dreamworldev.dev</span></div>
+    </div>
+    <div class="billed-to-and-invoice-basic-details">
+        <div class="billed-to">
+            <div class="label">Billed To:</div>
+            <div class="value">
+                <div class="name">DREAMWORLD SOLUTIONS PRIVATE LIMITED</div>
+                <div class="contact-details"> Phone. 9662350755 | <span>Email: monek@dreamworldev.dev</span></div>
+            </div>
+        </div>
+        <div class="invoice">
+            <div class="title">dreamworld</div>
+            <div class="number">
+                <div class="label">Number:</div>
+                <div class="value"><b>ST-5</b></div>
+            </div>
+            <div class="date">
+                <div class="label">Date:</div>
+                <div class="value">31 Mar 2023</div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table-1">
+        <colgroup>
+            <col style="width: 2%;">
+            <col style="width: 48%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+
+        <thead>
+            <tr class="header">
+                <th class="empty item-number"></th>
+                <th class="item-lable"> Item</th>
+                <th class="qut-lable">QTY</th>
+                <th class="rate">RATE</th>
+                <th class="amount">Amount</th>
+                <th class="discount">Discount</th>
+                <th class="total">Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="items">
+                <td class="item-number border-left-none">1</td>
+                <td class="item-name" colspan="2">item 2</td>
+                <td class="qut-lable">1 Month</td>
+                <td class="rate">91,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">91,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">2</td>
+                <td class="item-name" colspan="2">item 2</td>
+                <td class="qut-lable">2 Month</td>
+                <td class="rate">1,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">1,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">3</td>
+                <td class="item-name" colspan="2">item 3</td>
+                <td class="qut-lable">3 Month</td>
+                <td class="rate">200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">4</td>
+                <td class="item-name" colspan="2">item 4</td>
+                <td class="qut-lable">4 Month</td>
+                <td class="rate">4200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">4200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">5</td>
+                <td class="item-name" colspan="2">item 5</td>
+                <td class="qut-lable">5 Month</td>
+                <td class="rate">7200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">7200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">6</td>
+                <td class="item-name" colspan="2">item 6</td>
+                <td class="qut-lable">8 Month</td>
+                <td class="rate">8200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">8200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">7</td>
+                <td class="item-name" colspan="2">item 7</td>
+                <td class="qut-lable">7 Month</td>
+                <td class="rate">700.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">700.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">8</td>
+                <td class="item-name" colspan="2">item 8</td>
+                <td class="qut-lable">8 Month</td>
+                <td class="rate">7800.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">7800.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">9</td>
+                <td class="item-name" colspan="2">item 9</td>
+                <td class="qut-lable">1 Month</td>
+                <td class="rate">11,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">11,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">10</td>
+                <td class="item-name" colspan="2">item 10</td>
+                <td class="qut-lable">5 Month</td>
+                <td class="rate">4700.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">4700.00</td>
+            </tr>
+
+            <tr class="items">
+                <td class="item-number border-left-none">11</td>
+                <td class="item-name" colspan="2">item 11</td>
+                <td class="qut-lable">4 Month</td>
+                <td class="rate">7200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">7200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">12</td>
+                <td class="item-name" colspan="2">item 12</td>
+                <td class="qut-lable">6 Month</td>
+                <td class="rate">8200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">8200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">13</td>
+                <td class="item-name" colspan="2">item 13</td>
+                <td class="qut-lable">3 Month</td>
+                <td class="rate">14,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">14,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">14</td>
+                <td class="item-name" colspan="2">item 14</td>
+                <td class="qut-lable">7 Month</td>
+                <td class="rate">11,000.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">11,000.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">15</td>
+                <td class="item-name" colspan="2">item 15</td>
+                <td class="qut-lable">4 Month</td>
+                <td class="rate">7800.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">7800.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">015</td>
+                <td class="item-name" colspan="2">item 16</td>
+                <td class="qut-lable">1 Month</td>
+                <td class="rate">78,900.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">78,900.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">16</td>
+                <td class="item-name" colspan="2">item 17</td>
+                <td class="qut-lable">2 Month</td>
+                <td class="rate">91,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">91,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">17</td>
+                <td class="item-name" colspan="2">item 18</td>
+                <td class="qut-lable">3 Month</td>
+                <td class="rate">900.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">900.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">18</td>
+                <td class="item-name" colspan="2">item 19</td>
+                <td class="qut-lable">7 Month</td>
+                <td class="rate">9100.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">9100.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">20</td>
+                <td class="item-name" colspan="2">item 20</td>
+                <td class="qut-lable">8 Month</td>
+                <td class="rate">78,000.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">78,000.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">21</td>
+                <td class="item-name" colspan="2">item 21</td>
+                <td class="qut-lable">9 Month</td>
+                <td class="rate">47,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">47,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">22</td>
+                <td class="item-name" colspan="2">item 2</td>
+                <td class="qut-lable">5 Month</td>
+                <td class="rate">9200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">9,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">23</td>
+                <td class="item-name" colspan="2">item 22</td>
+                <td class="qut-lable">6 Month</td>
+                <td class="rate">1200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">1200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">24</td>
+                <td class="item-name" colspan="2">item 23</td>
+                <td class="qut-lable">4 Month</td>
+                <td class="rate">15,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">15,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">25</td>
+                <td class="item-name" colspan="2">item 24</td>
+                <td class="qut-lable">2 Month</td>
+                <td class="rate">41,100.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">41,100.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">26</td>
+                <td class="item-name" colspan="2">item 25</td>
+                <td class="qut-lable">3 Month</td>
+                <td class="rate">78,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">78,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">27</td>
+                <td class="item-name" colspan="2">item 26</td>
+                <td class="qut-lable">1 Month</td>
+                <td class="rate">45,100.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">45,100.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">28</td>
+                <td class="item-name" colspan="2">item 27</td>
+                <td class="qut-lable">1 Month</td>
+                <td class="rate">91,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">91,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">29</td>
+                <td class="item-name" colspan="2">item 28</td>
+                <td class="qut-lable">5 Month</td>
+                <td class="rate">32,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">32,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">30</td>
+                <td class="item-name" colspan="2">item 29</td>
+                <td class="qut-lable">5 Month</td>
+                <td class="rate">23,300.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">23,300.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">31</td>
+                <td class="item-name" colspan="2">item 30</td>
+                <td class="qut-lable">7 Month</td>
+                <td class="rate">14,500.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">14,500.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">32</td>
+                <td class="item-name" colspan="2">item 31</td>
+                <td class="qut-lable">8 Month</td>
+                <td class="rate">71,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">71,200.00</td>
+            </tr>
+            <tr class="items">
+                <td class="item-number border-left-none">33</td>
+                <td class="item-name" colspan="2">item 32</td>
+                <td class="qut-lable">9 Month</td>
+                <td class="rate">31,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">31,200.00</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr class="total-qty">
+                <td class="total-qty-lable" colspan="2"><b>Total qty</b></td>
+                <td colspan="5"><b>1000(Month)</b></td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    <table class="footer-table">
+        <tr class="footer">
+            <td class="br-0 net-amount-word" colspan="3"><b>Net Amount in Words<br>Three Thousand Rupees Only</b></td>
+            <td class="bl-0 net-amount">Net Amount</td>
+            <td class="bl-0 amount" colspan="2"><b>₹ 3,000.00</b></td>
+        </tr>
+
+        <tr class="footer">
+            <td class="br-0 bank-detail" colspan="3"><b>Bank details</b></td>
+            <td class="bl-0 total-amount">Total due</td>
+            <td class="bl-0 due-amount" colspan="2"><b>₹ 2,700.00</b></td>
+        </tr>
+
+        <tr class="footer">
+            <td class="br-0 bank-info" colspan="2">Bank: SBI, A/C Name: ABC LTD,<br> A/C number: 123456789, iFSC
+                cod:00051721</td>
+            <td colspan="3"></td>
+        </tr>
+
+        <tr class="footer">
+            <td class="br-0" colspan="3">
+                <table>
+                    <tr>
+                        <td class="terms-conditions"><b>Terms and conditions</b></td>
+                    </tr>
+
+                    <tr>
+                        <td>(1) Goods once sold will not be accepted return</td>
+                    </tr>
+
+                    <tr>
+                        <td>(2) In case of late payment interest 18% will be levied</td>
+                    </tr>
+
+                    <tr>
+                        <td>(3) Subject to Surat Jurisdiction. E & O.E</td>
+                    </tr>
+
+                </table>
+            </td>
+
+            <td class="br-0" colspan="1">
+                <table class="qr-code">
+                    <tr>
+                        <td class="scan-code">To get PDF copy scan this QR code</td>
+                    </tr>
+
+                    <tr>
+                        <td><img src="qr-code.svg" style="width: 100px;"></td>
+                    </tr>
+                </table>
+            </td>
+
+            <td class="br-0 receivers" colspan="2">
+                <table class="qr-code ">
+                    <tr>
+                        <td class="receivers-logo"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="receivers-lable">Receiver's Signature </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="authorised-logo"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="authorised-lable">Authorised signature</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
