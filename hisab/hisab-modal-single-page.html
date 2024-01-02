@@ -43,13 +43,12 @@
         }
 
         .company-details .name {
-            font-size: 18px;
+            font-size: 32px;
             font-weight: 600;
         }
 
         .billed-to-and-invoice-basic-details {
             display: flex;
-            border-bottom: 1px solid;
         }
 
         .billed-to-and-invoice-basic-details .billed-to {
@@ -64,7 +63,7 @@
 
         .billed-to-and-invoice-basic-details .billed-to .value .name {
             padding-top: 10px;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
         }
 
@@ -79,9 +78,9 @@
 
         .billed-to-and-invoice-basic-details .invoice .title {
             display: block;
-            align-items: center;
             font-size: 18px;
             font-weight: 600;
+
         }
 
         .billed-to-and-invoice-basic-details .invoice .label {
@@ -113,13 +112,6 @@
 
         col {
             padding-right: 4px;
-        }
-
-        .table-1 tbody::after {
-            content: "";
-            display: inline-block;
-            vertical-align: top;
-            min-height: 300px;
         }
 
         td,
@@ -250,7 +242,7 @@
             padding-left: 4px;
         }
 
-        .terms-conditions-title,
+        .terms-conditions,
         .bank-detail {
             padding: 10px 0;
         }
@@ -265,11 +257,11 @@
 
         .authorised-logo,
         .receivers-logo {
-            height: 43px;
+            height: 60px;
         }
 
-        .terms-conditions {
-            font-size: 12px;
+        .table-container {
+            min-height: 300px;
         }
     </style>
 </head>
@@ -301,43 +293,52 @@
             </div>
         </div>
     </div>
+    <div class="table-container">
+        <table class="table-1">
+            <colgroup>
+                <col style="width: 2%;">
+                <col style="width: 48%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+                <col style="width: 10%;">
+            </colgroup>
 
-    <table class="table-1">
-        <colgroup>
-            <col style="width: 2%;">
-            <col style="width: 48%;">
-            <col style="width: 10%;">
-            <col style="width: 10%;">
-            <col style="width: 10%;">
-            <col style="width: 10%;">
-            <col style="width: 10%;">
-        </colgroup>
+            <thead>
+                <tr class="header">
+                    <th class="empty item-number"></th>
+                    <th class="item-lable"> Item</th>
+                    <th class="qut-lable">QTY</th>
+                    <th class="rate">RATE</th>
+                    <th class="amounts">Amount</th>
+                    <th class="discount">Discount</th>
+                    <th class="total">Total</th>
+                </tr>
+            </thead>
 
-        <thead>
-            <tr class="header">
-                <th class="empty item-number"></th>
-                <th class="item-lable"> Item</th>
-                <th class="qut-lable">QTY</th>
-                <th class="rate">RATE</th>
-                <th class="amount">Amount</th>
-                <th class="discount">Discount</th>
-                <th class="total">Total</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr class="items">
-                <td class="item-number">1</td>
-                <td class="item-name"> i11</td>
-                <td class="qut-lable">1 Pcs</td>
-                <td class="rate">3000.00</td>
-                <td class="amount">3000.00</td>
-                <td class="discount">0.00</td>
-                <td class="total">20,000.00</td>
-            </tr>
-
-        </tbody>
-    </table>
+            <tbody>
+                <tr class="items">
+                    <td class="item-number border-left-none">1</td>
+                    <td class="item-name">item 2</td>
+                    <td class="qut-lable">1 Month</td>
+                    <td class="rate">91,200.00</td>
+                    <td class="rate">91,200.00</td>
+                    <td class="discount">0.00</td>
+                    <td class="total border-right-none">91,200.00</td>
+                </tr>
+                <tr class="items">
+                    <td class="item-number border-left-none">1</td>
+                    <td class="item-name">item 2</td>
+                    <td class="qut-lable">1 Month</td>
+                    <td class="rate">91,200.00</td>
+                    <td class="rate">91,200.00</td>
+                    <td class="discount">0.00</td>
+                    <td class="total border-right-none">91,200.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <table>
         <colgroup>
@@ -352,12 +353,14 @@
         <tfoot>
             <tr class="total-qty">
                 <td class="total-qty-lable" colspan="2"><b>Total qty</b></td>
-                <td colspan="5"><b>1000(Bottl)</b></td>
+                <td colspan="5"><b>1000(Month)</b></td>
             </tr>
         </tfoot>
     </table>
 
-    <table class="footer-table">
+    </table>
+
+    <table class="footer">
         <tr class="footer">
             <td class="br-0 net-amount-word" colspan="3"><b>Net Amount in Words<br>Three Thousand Rupees Only</b></td>
             <td class="bl-0 net-amount">Net Amount</td>
@@ -376,11 +379,11 @@
             <td colspan="3"></td>
         </tr>
 
-        <tr class="footer">
+        <tr class="footer-terms">
             <td class="br-0" colspan="3">
-                <table class="terms-conditions">
+                <table>
                     <tr>
-                        <td class="terms-conditions-title"><b>Terms and conditions</b></td>
+                        <td class="terms-conditions"><b>Terms and conditions</b></td>
                     </tr>
 
                     <tr>
