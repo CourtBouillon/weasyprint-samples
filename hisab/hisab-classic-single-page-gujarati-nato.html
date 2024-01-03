@@ -1,0 +1,467 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="hisab.css" media="print" rel="stylesheet">
+    <title>Invoice</title>
+    <meta name="description" content="Hisab invoice demo sample">
+    <style>
+        @page {
+            font-family: Noto;
+            margin: 24px;
+            border: 1px solid;
+
+            @bottom-left {
+                content: 'Generated using: https://hisab.co';
+                font-weight: 600;
+            }
+
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-weight: 600;
+            }
+        }
+
+        html {
+            margin: 0;
+            color: rgba(0, 0, 0, .87);
+            font-size: 14px;
+            font-family: Noto;
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        .company-details {
+            border-bottom: 1px solid;
+            padding: 8px 4px 4px 4px;
+        }
+
+        .company-details>* {
+            text-align: center;
+        }
+
+        /* .company-details .name,
+    .company-details .addres {
+      flex: 1;
+    } */
+
+        .company-details .name {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details {
+            display: flex;
+            border-bottom: 1px solid;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to {
+            flex: 1;
+            display: flex;
+            border-right: 1px solid;
+            padding: 6px 8px;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to .label {
+            margin-right: 12px;
+            flex: none;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to .value {
+            flex: 1;
+        }
+
+        .billed-to-and-invoice-basic-details .billed-to .value .name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice {
+            min-width: 170px;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice>* {
+            display: flex;
+            padding: 6px 8px;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .title {
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            border-bottom: 1px solid;
+            font-weight: 600;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .label {
+            min-width: 90px;
+            margin-right: 4px;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .value {
+            white-space: nowrap;
+        }
+
+        .billed-to-and-invoice-basic-details .invoice .number,
+        .billed-to-and-invoice-basic-details .invoice .date {
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .header th,
+        .items td,
+        .total-qty td,
+        .net-amount-container td,
+        .Bank td,
+        .terms th,
+        .terms td,
+        .receivers-container td,
+        .tds td,
+        .net-payable td {
+            text-align: right;
+            padding-right: 4px;
+            vertical-align: top;
+            border: 1px solid black;
+        }
+
+        .header .item-lable {
+            border-left: 0px;
+            text-align: start;
+        }
+
+        .header .empty,
+        .items .item-number {
+            border-right: 0px;
+        }
+
+        .border-left-none {
+            border-left: none !important;
+        }
+
+        .border-right-none {
+            border-right: none !important;
+        }
+
+        .items td {
+            padding-top: 10px;
+        }
+
+        .items .item-name {
+            text-align: justify;
+        }
+
+        .items .item-number {
+            text-align: justify;
+            padding-left: 4px;
+        }
+
+        .items .item-name {
+            border-left: 0px;
+        }
+
+        .table-1 tbody::after {
+            content: "";
+            display: inline-block;
+            vertical-align: top;
+            min-height: 300px;
+        }
+
+        .total-qty .qty,
+        .net-amount-container .net-amount-word,
+        .Bank .bank-detail {
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .net-amount-container td,
+        .Bank td {
+            padding: 4px;
+        }
+
+        .net-amount-container .amount {
+            border-left: 0;
+            text-align: left;
+            padding-top: 20px;
+        }
+
+        .net-amount-container .net-amount-lable,
+        .net-amount-container .net-amount,
+        .Bank .net-amount-lable {
+            padding-top: 20px;
+            border-bottom: 0;
+        }
+
+        .Bank .net-amount-empty {
+            border-top: 0;
+        }
+
+        .terms .details,
+        .terms .title,
+        .terms th {
+            text-align: left;
+            padding-left: 10px;
+            border-top: 0px;
+            border-bottom: 0px;
+        }
+
+        .terms .detail {
+            text-align: left;
+            border-top: 0px;
+            padding-left: 10px;
+            border-bottom: 0px;
+        }
+
+        .terms .authorised,
+        .terms .signature {
+            text-align: center;
+        }
+
+        .receivers-container td,
+        .header th {
+            border-top: 0px;
+        }
+
+        .receivers-container .receivers,
+        .receivers-container .authorised {
+            text-align: center;
+            border-top: 1px solid;
+            padding: 0 10px;
+        }
+
+        .total-qty td {
+            border-bottom: 0;
+        }
+
+        .Bank .net-payable {
+            text-align: left;
+            border-left: 0;
+            padding-left: 10px;
+        }
+
+        .net-amount-container .net-amount,
+        .Bank .tds-amount {
+            padding-right: 10px;
+            border-left: 0;
+        }
+
+        .net-payable td {
+            padding-top: 0;
+        }
+
+        .Bank .tds-lable,
+        .net-payable .net-payable-lable,
+        .net-amount-container .net-amount-lable,
+        .Bank .tds-lable {
+            border-right: 0;
+        }
+
+        .Bank .net-payable-lable,
+        .Bank .net-payable,
+        .Bank .net-payable-lable,
+        .tds .tds-amount {
+            padding-top: 10px;
+        }
+
+        .Bank .tds-amount,
+        .Bank .tds-lable {
+            padding-top: 18px;
+        }
+
+        .Bank .net-payable-lable,
+        .Bank .net-payable,
+        .net-payable td {
+            border-top: 0;
+        }
+
+        .net-amount-container .net-amount {
+            border-bottom: 0;
+        }
+
+        .title {
+            padding: 10px 0 8px 0;
+        }
+
+        .Bank .bank-detail {
+            padding: 10px 0 0 10px;
+        }
+
+        .terms .details,
+        .terms .detail,
+        .bank-detail {
+            font-size: 14px;
+        }
+
+        .net-payable td {
+            padding-bottom: 10px;
+        }
+
+        .tds-table td,
+        .net-amount-table td {
+            border: 0;
+        }
+
+        .Bank .tds-container {
+            border-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="company-details">
+        <div class="name">શકીલ મન્સુરી</div>
+        <div class="address">પંચાયત શેરી, ખાતે અને પોસ્ટ: નવેઠા, ભરૂચ, 392012, ગુજરાત</div>
+    </div>
+    <div class="billed-to-and-invoice-basic-details">
+        <div class="billed-to">
+            <div class="label">Billed To:</div>
+            <div class="value">
+                <div class="name">ડ્રીમવર્લ્ડ સોલ્યુશન્સ પ્રાઇવેટ લિમિટેડ</div>
+                <div class="address">દુકાન નં. 414, રોયલ સ્ક્વેર, ઉતરાણ સુરત, સુરત, 394105, ગુજરાત</div>
+                <div class="mobile">મો.9662350755</div>
+            </div>
+        </div>
+        <div class="invoice">
+            <div class="title">ઇન્વૉઇસેસ</div>
+            <div class="number">
+                <div class="label">નંબર:</div>
+                <div class="value">એસએમ-12</div>
+            </div>
+            <div class="date">
+                <div class="label">તારીખ:</div>
+                <div class="value">31 માર્ચ 2023</div>
+            </div>
+        </div>
+    </div>
+    <table class="table-1">
+        <colgroup>
+            <col style="width: 2%;">
+            <col style="width: 48%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+
+        <thead>
+            <tr class="header">
+                <th class="empty item-number border-left-none"></th>
+                <th class="item-lable" colspan="2"> વસ્તુ</th>
+                <th class="qut-lable">જથ્થો</th>
+                <th class="rate">રેટ</th>
+                <th class="discount">ડિસ્કાઉન્ટ</th>
+                <th class="total border-right-none">કુલ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="items">
+                <td class="item-number border-left-none">1</td>
+                <td class="item-name" colspan="2">સોફ્ટવેર વિકાસ</td>
+                <td class="qut-lable">1 મહિનો</td>
+                <td class="rate">91,200.00</td>
+                <td class="discount">0.00</td>
+                <td class="total border-right-none">91,200.00</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <colgroup>
+            <col style="width: 2%;">
+            <col style="width: 48%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+        <tr class="total-qty">
+            <td colspan="3" class="border-left-none"><b>કુલ જથ્થો</b></td>
+            <td colspan="4" class="qty border-right-none"><b>1 (મહિનો)</b></td>
+        </tr>
+    </table>
+    <table>
+        <colgroup>
+            <col style="width: 2%;">
+            <col style="width: 48%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+            <col style="width: 10%;">
+        </colgroup>
+
+        <tr class="net-amount-container">
+            <td colspan="4" class="net-amount-word border-left-none"><b>શબ્દોમાં ચોખ્ખી ચૂકવણીપાત્ર</b> <br>બ્યાસી હજાર
+                એંસી રૂપિયા જ</td>
+
+            <td colspan="3" class="net-amount-lable border-right-none">
+                <table class="net-amount-table ">
+                    <tr>
+                        <td> ચોખ્ખી રકમ </td>
+                        <td><b>₹ 91,200.00</b></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="Bank">
+            <td colspan="4" class="bank-detail border-left-none"><b>બેંકની વિગતો</b> <br> બેંક:, A/C નામ: ABC LTD,<br>
+                A/C
+                સંખ્યા:
+                123456789, iFSC કોડ: 00051721</td>
+            <td colspan="3" class="tds-container border-right-none">
+                <table class="tds-table ">
+                    <tr>
+                        <td> ટીડીએસ (10%) </td>
+                        <td> ₹ -9,120.00</td>
+                    </tr>
+
+                    <tr>
+                        <td> ચોખ્ખી ચૂકવણીપાત્ર </td>
+                        <td><b>₹ 82,080.00</b></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="terms">
+            <th colspan="2" class="title border-left-none">નિયમો અને શરત </th>
+            <th colspan="2" rowspan="4"></th>
+            <th colspan="2" rowspan="4"></th>
+            <th colspan="1" rowspan="4" class="border-right-none"></th>
+        </tr>
+
+        <tr class="terms">
+            <td class="details border-left-none" colspan="2">(1) એકવાર વેચાયેલ માલ પરત સ્વીકારવામાં આવશે નહીં</td>
+        </tr>
+        <tr class="terms">
+            <td class="details border-left-none" colspan="2">(2) મોડી ચુકવણીના કિસ્સામાં વ્યાજ 18% હશે
+                વસૂલ્યું</td>
+        </tr>
+        <tr class="terms">
+            <td class="detail border-left-none" colspan="2">(3) સુરત અધિકારક્ષેત્રને આધીન. ઇ અને ઓ.ઇ</td>
+        </tr>
+
+        <tr class="receivers-container">
+            <td colspan="2" class="empty border-left-none"></td>
+            <td colspan="2">
+                <div class="receivers">પ્રાપ્તકર્તાની સહી </div>
+            </td>
+            <td colspan="2">
+                <div class="authorised"> અધિકૃત હસ્તાક્ષર </div>
+            </td>
+            <td colspan="1" class="border-right-none"> </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
