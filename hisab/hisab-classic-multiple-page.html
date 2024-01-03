@@ -7,8 +7,9 @@
   <meta name="description" content="Hisab invoice demo sample">
   <style>
     @page {
+      position: relative;
       font-family: Roboto;
-      margin: 40px 24px 24px 24px;
+      margin: 88px 24px 24px 24px;
       border: 1px solid;
 
       @bottom-left {
@@ -22,26 +23,15 @@
       }
 
       @top-center {
-        content: "Shakil Mansuri";
-        font-size: 24px;
-        font-weight: 600;
-        margin: 0;
-      }
-
-      @top-right {
-        content: "Invoice # 22-1";
-        margin: 0;
+        content: element(heading);
+        margin: 24px;
+        width: 100%;
       }
     }
 
     @page :first {
       margin: 24px;
       @top-center {
-        content: normal;
-        margin: 0;
-      }
-
-      @top-right {
         content: normal;
         margin: 0;
       }
@@ -52,6 +42,33 @@
       color: rgba(0, 0, 0, .87);
       font-size: 14px;
       font-family: Roboto;
+    }
+
+    div.page-top-header {
+      position: running(heading); 
+      margin-top: 26px;
+    }
+
+    div.page-top-header div {
+      border: 1px solid;
+    }
+
+    div.page-top-header div.company-name {
+      display: flex;
+      justify-content: center;
+      border-bottom: none;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 600;
+      padding: 4px 0px;
+    }
+
+    div.page-top-header div.invoice-number {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 4px 2px 4px 0px;
+      border-bottom: none;
     }
 
     body {
@@ -335,6 +352,10 @@
 </head>
 
 <body>
+  <div class="page-top-header">
+    <div class="company-name">Shakil Mansuri</div>
+    <div class="invoice-number">Invoice # 22-1</div>
+  </div>
   <div class="company-details">
     <div class="name">Shakil Mansuri</div>
     <div class="address">Panchayat street, At & post: Navetha, Bharuch, 392012, Gujarat</div>
