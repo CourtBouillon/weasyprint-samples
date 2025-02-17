@@ -80,6 +80,9 @@ html {
   font-weight: 300;
   line-height: 1.5;
 }
+body {
+  margin: 0;
+}
 
 h1 {
   color: #fbc847;
