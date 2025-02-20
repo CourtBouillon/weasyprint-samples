@@ -1,258 +1,4662 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link href="report.css" rel="stylesheet">
-    <title>Report</title>
-    <meta name="description" content="Report example">
-  </head>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>AECB Report</title>
+	<style>
+        @page {
+            margin-top: 25mm;
+            @top-left {
+                content: element(headerLeft);
+                font-family: arial;
+            }
+            @bottom-left {
+               content: "For additional information on the Credit Report and Credit Score, please visit the FAQs section on our website aecb.ae";
+               font-family: arial;
+               font-size: 10px;
+               color: #666;
+               border-top: 1px solid #434190;
+            }
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-family: arial;
+                font-size: 10px;
+                color: #666;
+                border-top: 1px solid #434190;
+            }
+        }
 
-  <body>
-    <article id="cover">
-      <h1>Report example</h1>
-      <address>
-        WeasyPrint
-        26 rue Emile Decorps
-        69100 Villeurbanne France
-      </address>
-      <address>
-        contact@courtbouillon.org
-        https://courtbouillon.org
-      </address>
-    </article>
+        .headerLeft {
+            position: running(headerLeft);
+            width: 100%;
+            overflow: hidden;
+        }
+        body {
+            font-family: arial;
 
-    <article id="contents">
-      <h2>Table of contents</h2>
-      <h3>Part one</h3>
-      <ul>
-        <li><a href="#columns-title"></a></li>
-        <li><a href="#skills-title"></a></li>
-      </ul>
+            color: #333;
+        }
 
-      <h3>Part two</h3>
-      <ul>
-        <li><a href="#offers-title"></a></li>
-        <li><a href="#chapter-title"></a></li>
-        <li><a href="#typography-title"></a></li>
-      </ul>
-    </article>
+        .container {
+            width: 100%;
+            clear: both;
+        }
 
-    <article id="columns">
-      <h2 id="columns-title">Big title on left page, with text on columns</h2>
+        .logo {
+            float: left;
+            width: 48%;
+        }
+        .logo img {
+            width: 150px;
+        }
 
-      <h3>This is a little subtitle, here to explain what we are talking about</h3>
+        .headerRight{
+            float: right;
+            width: 48%;
+        }
 
-      <section>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam volutpat faucibus vestibulum.
-          Mauris varius orci quam. Nam dui mauris, dictum at elementum at, mollis pulvinar est.
-          Nunc lobortis pharetra erat, id rutrum lorem malesuada in.
-        </p>
-        <p>
-          Phasellus id nisl nec arcu tempor ultricies non id tortor. Mauris ex nibh, viverra vitae nisi eget, placerat pharetra est.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id maximus diam. Cras molestie nisl vitae iaculis convallis.
-          Vivamus molestie vitae nisl sed interdum. Nunc aliquam massa rhoncus finibus convallis.
-          Vivamus sed vulputate risus. Nunc dignissim magna velit, quis lobortis ex volutpat eget.
-          Proin dictum mauris condimentum consequat faucibus.
-        </p>
-        <p>
-          Duis maximus mauris ac purus eleifend, sit amet blandit nulla lacinia.
-          Maecenas massa dolor, suscipit at erat eget, maximus dignissim dolor. Praesent consectetur maximus libero, eu facilisis ligula finibus et.
-          Cras rhoncus eros sit amet lorem auctor, a efficitur leo tincidunt. Sed viverra interdum odio, eget pulvinar tortor blandit lacinia.
-          Praesent consequat congue commodo. Phasellus eu massa feugiat, imperdiet nisi a, sagittis ipsum.
-        </p>
-        <p>
-          Suspendisse et gravida nunc. Quisque at felis nisl. Nam eget efficitur nunc.
-          Vivamus fermentum imperdiet massa, porttitor elementum mauris faucibus scelerisque.
-          Pellentesque ut metus tortor. Fusce vulputate ex at turpis consectetur, in vestibulum odio placerat.
-          Suspendisse tempor sapien rutrum, cursus sem a, tincidunt odio. Sed in consequat augue.
-          Proin finibus felis neque, ac hendrerit lorem consequat nec.
-        </p>
-        <p>
-          Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce quam mi, dapibus et augue sit amet, porttitor volutpat orci.
-          Vestibulum ac ligula at justo placerat pulvinar vel non velit. Duis vel iaculis nibh, non tristique lectus.
-          Phasellus vel ex bibendum, accumsan tellus a, commodo nisi.
-        </p>
-        <p>
-          Mauris tincidunt dolor ligula, et egestas lectus rutrum consectetur. Donec ac ex mollis, vestibulum libero in, convallis risus.
-        </p>
-      </section>
-    </article>
+        .report-info {
+            float: right;
+            text-align: left;
+        }
 
-    <article id="skills">
-      <h2 id="skills-title">This is another big title, on a page full of work presentation</h2>
+        .report-info h2 {
+            margin: 0;
+            font-size: 12px;
+        }
 
-      <h3>We present you some of WeasyPrint's features.</h3>
+        .report-info p {
+            margin: 0;
+            font-size: 10px;
+            color: #666;
+        }
 
-      <section id="table-content">
-        <h4>Table of contents</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi ante, tincidunt quis vehicula
-          sed, vehicula sed augue. Cras eget ante turpis.
-        </p>
-      </section>
+        /* Content Section */
+        .main-content {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
 
-      <section id="heading">
-        <h4>Heading titles and page counters</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi ante, tincidunt quis vehicula
-          sed, vehicula sed augue. Cras eget ante turpis.
-        </p>
-      </section>
+        .left-section {
+            float: left;
+            width: 65%;
+        }
 
-      <section id="multi-columns">
-        <h4>Multi-column text</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi ante, tincidunt quis vehicula
-          sed, vehicula sed augue. Cras eget ante turpis.
-        </p>
-      </section>
+        .right-section {
+            float: right;
+            width: 30%;
+        }
 
-      <section id="internal-links">
-        <h4>Internal links</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi ante, tincidunt quis vehicula
-          sed, vehicula sed augue. Cras eget ante turpis.
-        </p>
-      </section>
+        /* Credit Score */
+        .credit-score-circle {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #ff9800;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 120px;
+            font-size: 40px;
+            margin: 20px auto;
+            color: #ff9800;
+        }
+        /* Credit score section */
+        .circle {
+            position: relative;
+            width: 200px;
+            height: 180px;
+            margin: 0 auto;
+        }
+        .credit-score-text {
+            font-weight: bold;
+            font-size: 14px;
+            color: #003366;
+            text-align: center;
+        }
+        .credit-score-sub-text{
+            font-size: 8px;
+            color: #003366;
+            text-align: center;
+        }
+        .credit-info {
+            font-size: 10px;
+            text-align: center;
+            color: #003366;
+        }
+        .credit-info strong {
+            font-size: 10px;
+            display: block;
+            margin-top: 7px;
+            color: #003366;
+        }
+        #expenseRatioValue{
+            font-size: 18px;
+        }
+        .credit-info .grey-text {
+            font-weight: bold;
+            color: #666;
+        }
+        .credit-info .highlight-value {
+            font-weight: bold;
+            color: #003366;
+        }
+        .score-bar {
+            width: 80%;
+            height: 8px;
+            margin: 7px auto;
+            background-color: #eee;
+            border-radius: 4px;
+            position: relative;
+        }
+        .score-bar-fill {
+            height: 100%;
+            background-color: #003366;
+            border-radius: 4px;
+            /*transition: width 0.5s ease-in-out; */
+            width: 22%; /* expense progress bar */
+        }
+        .expense-ratio {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-      <section id="style">
-        <h4>Different page types</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi ante, tincidunt quis vehicula
-          sed, vehicula sed augue. Cras eget ante turpis.
-        </p>
-      </section>
-    </article>
+        h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        h4 {
+            margin: 0 0 10px 0;
+            font-size: 11px;
+        }
+        h2, h3, h4 {
+            color: #004080;
+            font-weight: bold;
+        }
+        .heading-text {
+            font-weight: bold;
+            font-size: 15px;
+            color: #003366;
+        }
+        .heading-text-1{
+            font-weight: bold;
+            font-size: 12px;
+            color: #003366;
+        }
+        .heading-text-2{
+            font-weight: bold;
+            font-size: 10px;
+            color: #003366;
+        }
+		.report-title{
+			font-size: 20px;
+            color: #003366;
+            text-align: center;
+			background-color: #f9f9f9;
+            border-radius: 25px;
+            padding: 10px 20px;
+		}
 
-    <article id="offers">
-      <h2 id="offers-title">Big title on the first right page</h2>
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            page-break-inside: auto;
+            font-size: 10px;
+            -fs-table-paginate: paginate;
+        }
+        thead { display: table-header-group; }
 
-      <section>
-        <h4>Offer #1</h4>
-        <p>€135</p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Nullam at diam eget urna consequat.</li>
-          <li>Sed fringilla quam at augue semper aliquam.</li>
-          <li>Cras nec lacus eu turpis finibus vulputate.</li>
-        </ul>
-      </section>
+        table th, table td {
+            padding: 7px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
 
-      <section>
-        <h4>Offer #2</h4>
-        <p>€175</p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Nullam at diam eget urna consequat.</li>
-          <li>Sed fringilla quam at augue semper aliquam.</li>
-          <li>Mauris viverra nulla vel semper mollis.</li>
-          <li>Nulla quis massa eu urna suscipit vehicula.</li>
-          <li>Curabitur a odio id risus pharetra iaculis.</li>
-        </ul>
-      </section>
+        table th {
+            background-color: #f2f2f2;
+        }
 
-      <section>
-        <h4>Offer #3</h4>
-        <p>€200</p>
-        <ul>
-          <li>Lorem ipsum dolor sit amet.</li>
-          <li>Nullam at diam eget urna consequat.</li>
-          <li>Sed fringilla quam at augue semper aliquam.</li>
-          <li>Mauris viverra nulla vel semper mollis.</li>
-          <li>Cras nec lacus eu turpis finibus vulputate.</li>
-          <li>Nulla quis massa eu urna suscipit vehicula.</li>
-          <li>Curabitur a odio id risus pharetra iaculis.</li>
-          <li>Mauris viverra nulla vel semper mollis.</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        </ul>
-      </section>
-    </article>
+        .green-circle, .grey-circle {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .green-circle {
+            background-color: green;
+        }
+        .grey-circle {
+            background-color: grey;
+        }
 
-    <article id="chapter">
-      <h2 id="chapter-title">This is a chapter of a new section</h2>
-    </article>
+        .summary-section {
+            display: table;
+            width: 100%;
+            margin-top: 10px;
+        }
 
-    <article id="typography">
-      <h2 id="typography-title">About some typography features</h2>
+		.summary-table-installment {
+            width: 48%;
+            float: left;
+        }
+        .summary-table-notInstallment {
+            width: 48%;
+            float: right;
+        }
 
-      <section>
-        <h4>Italic and Bold Text</h4>
-        <p>
-          Lorem ipsum dolor <em>sit amet, consectetur adipiscing elit.</em> Ut
-          pulvinar dolor <strong>ac orci finibus elementum. Praesent</strong>
-          sit amet ligula turpis.
-        </p>
-      </section>
+        .summary-table-credit {
+            width: 48%;
+            float: left;
+        }
+        .summary-table-telco {
+            width: 48%;
+            float: right;
+        }
+        .summary-header {
+            margin-bottom: 10px;
+        }
+        .summary-header .green{
+            background-color: green;
+            border-radius: 50%;
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
+        }
+        .summary-header .red{
+            background-color: red;
+            border-radius: 50%;
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
+        }
+        /* Consolidated Historical Data Table Colors */
+        .status-green {
+            background-color: green;
+        }
+        .status-yellow {
+            background-color: yellow;
+        }
+        .status-empty {
+            background-color: #ffffff;
+        }
+        /* Table for Consolidated Historical Data */
+        .consolidated-table {
+            margin-top: 20px;
+        }
+        .consolidated-table th, .consolidated-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        .consolidated-table th {
+            background-color: #f2f2f2;
+        }
 
-      <section id="small-caps">
-        <h4>Small Caps Text</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar
-          dolor ac orci finibus elementum.
-        </p>
-      </section>
+        .balance-exposure-section {
+            display: table;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .balance-table {
+            width: 48%;
+            float: left;
+        }
+        .exposure-table {
+            width: 48%;
+            float: right;
+        }
+        .credit-facilities-section table{
+            width: 100%;
+        }
+        .contract-details-container{
+            display: table;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .contract-details-left-section {
+            width: 48%;
+            float: left;
+        }
+        .contract-details-right-section {
+            width: 48%;
+            float: right;
+        }
+        .contract-details-table th{
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="headerLeft">
+	<div class="logo">
+		<img src="data:image/png;base64,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" alt="AECB Logo"/>
+	</div>
+	<div class="headerRight">
+		<div class="report-info">
+			<h2>MOHAMED AHMED MOHAMED</h2>
+			<p>Credit Report created on 16/1/25 10:58:34 AM</p>
+			<p>Response ID: 667e3c26-a98e-4dd4-9ab4-233adeb4ea14</p>
+			<p>Private and Confidential</p>
+		</div>
+	</div>
+</div>
 
-      <section id="ligatures">
-        <h4>Ligatures</h4>
-        <dl>
-          <dt>Classical</dt>
-          <dd><span class="none">Offer</span> → <span class="common">Offer</span></dd>
-          <dt>Discretionary</dt>
-          <dd><span class="none">Often</span> → <span class="discretionary">Often</span></dd>
-          <dt>Contextual</dt>
-          <dd><span class="none">#&amp;</span> → <span class="contextual">#&amp;</span></dd>
-        </dl>
-      </section>
 
-      <section id="numbers">
-        <h4>Numbers</h4>
-        <dl>
-          <dt>Fractions</dt>
-          <dd>421/42 → <span id="fractions">421/42</span></dd>
-          <dt>Ordinals</dt>
-          <dd>2a 3o → <span id="ordinals">2a 3o</span></dd>
-          <dt>Slashed zero</dt>
-          <dd>1000 → <span id="slashed">1000</span></dd>
-          <dt>Superscript</dt>
-          <dd>a2 → <span id="super">a2</span></dd>
-          <dt>Subscript</dt>
-          <dd>C8H10N4O2 → <span id="sub">C8H10N4O2</span></dd>
-        </dl>
-      </section>
+<div class="container">
+	<!-- Main Content -->
+	<div class="main-content">
+		<!-- Left Section -->
+		<div class="left-section">
+			<div class="heading-text">Customer Information</div>
+			<table>
+				<thead>
+				<th></th>
+				<th></th>
+				<th>Provider No.</th>
+				<th>Date Of Last Update</th>
+				</thead>
+				<tbody>
+				<tr>
+					<th>CB Subject Id</th>
+					<td>M36905179</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Provider Subject No</th>
+					<td> 13525543 </td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Title</th>
+					<td> MR </td>
+					<td> T04 </td>
+					<td> 18 January 2022 </td>
+				</tr>
+				<tr>
+					<th>Last Name</th>
+					<td> MOHAMED </td>
+					<td> T02 </td>
+					<td> 24 July 2024 </td>
+				</tr>
+				<tr>
+					<th>First Name</th>
+					<td> MOHAMED AHMED </td>
+					<td> C08 </td>
+					<td> 28 May 2024 </td>
+				</tr>
+				<tr>
+					<th>Full Name</th>
+					<td> MOHAMED AHMED MOHAMED </td>
+					<td> T04 </td>
+					<td> 18 January 2022 </td>
+				</tr>
+				<tr>
+					<th>Arabic Last Name</th>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+				</tr>
+				<tr>
+					<th>Arabic First Name</th>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+				</tr>
+				<tr>
+					<th>Arabic Full Name</th>
+					<td> محمد احمد محمد </td>
+					<td> B01 </td>
+					<td> 26 May 2024 </td>
+				</tr>
+				<tr>
+					<th>Gender</th>
+					<td> Male </td>
+					<td> T02 </td>
+					<td> 24 July 2024 </td>
+				</tr>
+				<tr>
+					<th>Date of Birth</th>
+					<td> 22 March 1983 </td>
+					<td> T02 </td>
+					<td> 24 July 2024 </td>
+				</tr>
+				<tr>
+					<th>Nationality</th>
+					<td> UNITED ARAB EMIRATES </td>
+					<td> T02 </td>
+					<td> 24 July 2024 </td>
+				</tr>
+				<tr>
+					<th>Resident Flag</th>
+					<td> 1 </td>
+					<td> T02 </td>
+					<td> 14 January 2020 </td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 
-      <section id="figures">
-        <h4>Figures</h4>
-        <dl>
-          <dt>Lining</dt>
-          <dd>
-            <ul>
-              <li>409,280</li>
-              <li>367,112</li>
-            </ul>
-          </dd>
-          <dt>Old-Style</dt>
-          <dd>
-            <ul id="oldstyle">
-              <li>409,280</li>
-              <li>367,112</li>
-            </ul>
-          </dd>
-          <dt>Tabular</dt>
-          <dd>
-            <ul id="tabular">
-              <li>409,280</li>
-              <li>367,112</li>
-            </ul>
-          </dd>
-          <dt>Old &amp; Tab.</dt>
-          <dd>
-            <ul id="old-tabular">
-              <li>409,280</li>
-              <li>367,112</li>
-            </ul>
-          </dd>
-        </dl>
-      </section>
-    </article>
-  </body>
+		<!-- Right Section -->
+		<div class="right-section">
+			<div class="heading-text">Credit Summary</div>
+			<div class="credit-score-container">
+				<div class="credit-score-circle">541</div>
+				<div class="credit-score-text">
+					Credit Score
+				</div>
+				<div class="credit-score-sub-text">
+					using Alternative Data
+				</div>
+
+				<!-- Credit Info -->
+				<div class="credit-info">
+					<p><strong>The Customer has at least one active National Defaulted Debt Settlement Fund (NDDSF)</strong></p>
+					<div class="grey-text">Total Outstanding: <span class="highlight-value">0</span></div>
+					<div class="grey-text">Total Overdue: <span class="highlight-value">0</span></div>
+					<div class="grey-text">No. of Default Contracts: <span class="highlight-value">0</span></div>
+					<div class="grey-text">Total Outstanding (Telco and Utilities): <span class="highlight-value">0</span></div>
+					<!-- Expense to Salary Ratio -->
+					<strong id="expenseRatioValue">22%</strong>
+					<!-- Score Bar -->
+					<div class="score-bar">
+						<div class="score-bar-fill" id="expenseBarFill"></div>
+					</div>
+					<strong>Expense-to-Salary Ratio</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- history main contents div-->
+	<div class="main-content">
+		<!-- Title table -->
+		<table>
+			<thead>
+			<th width="50%">Title</th>
+			<th>Provider No.</th>
+			<th>Date Of Last Update</th>
+			</thead>
+			<tbody>
+			<tr>
+				<td> MR </td>
+				<td> T04 </td>
+				<td> 18 January 2022 </td>
+			</tr>
+		</tbody>
+		</table>
+
+	<!-- Last Name table -->
+	<table>
+		<thead>
+		<th width="50%">Last Name</th>
+		<th>Provider No.</th>
+		<th>Date Of Last Update</th>
+		</thead>
+		<tbody>
+		<tr>
+			<td> MOHAMED </td>
+			<td> T02 </td>
+			<td> 24 July 2024 </td>
+		</tr>
+		<tr>
+			<td colspan="3"><strong>Historical Data</strong></td>
+		</tr>
+		<tr>
+			<td> AHMED MOHAMED </td>
+			<td> C08 </td>
+			<td> 15 August 2023 </td>
+		</tr>
+	</tbody>
+	</table>
+
+<!-- First Name table -->
+<table>
+	<thead>
+	<th width="50%">First Name</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> MOHAMED AHMED </td>
+		<td> C08 </td>
+		<td> 28 May 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> MOHAMED </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td> MOHAMED </td>
+		<td> C08 </td>
+		<td> 15 August 2023 </td>
+	</tr>
+	<tr>
+		<td> MOHAMED </td>
+		<td> B10 </td>
+		<td> 16 July 2023 </td>
+	</tr>
+</tbody>
+</table>
+<!-- Full Name table -->
+<table>
+	<thead>
+	<th width="50%">Full Name</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> MOHAMED AHMED MOHAMED </td>
+		<td> T04 </td>
+		<td> 18 January 2022 </td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> MOHAMED AHMED MOHAMED AL DAROUDI </td>
+		<td> B06 </td>
+		<td> 22 August 2023 </td>
+	</tr>
+	<tr>
+		<td> MOHAMED AHMED MOHAMED AL DAROUDI </td>
+		<td> B09 </td>
+		<td> 18 October 2023 </td>
+	</tr>
+	<tr>
+		<td> MOHAMED MOHAMED </td>
+		<td> T02 </td>
+		<td> 18 September 2021 </td>
+	</tr>
+	<tr>
+		<td> MOHAMEDAHMEDMOHAMED </td>
+		<td> B01 </td>
+		<td> 16 August 2022 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- Arabic Full Name table -->
+<table>
+	<thead>
+	<th width="50%">Arabic Full Name</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> محمد احمد محمد </td>
+		<td> B01 </td>
+		<td> 26 May 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> محمداحمدمحمد </td>
+		<td> B01 </td>
+		<td> 14 March 2023 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- Gender table -->
+<table>
+	<thead>
+	<th width="50%">Gender</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> Male </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> OTHERS </td>
+		<td> B01 </td>
+		<td> 01 August 2021 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- dob table -->
+<table>
+	<thead>
+	<th width="50%">Date of Birth</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> 22 March 1983 </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> 12 December 1980 </td>
+		<td> B01 </td>
+		<td> 14 March 2023 </td>
+	</tr>
+	<tr>
+		<td> 22 February 1983 </td>
+		<td> B09 </td>
+		<td> 18 October 2023 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- Nationality table -->
+<table>
+	<thead>
+	<th width="50%">Nationality</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> UNITED ARAB EMIRATES </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- resident flag table -->
+<table>
+	<thead>
+	<th width="50%">Resident Flag</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td> 1 </td>
+		<td> T02 </td>
+		<td> 14 January 2020 </td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> 0 </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+</tbody>
+</table>
+
+<div class="heading-text">Identification</div>
+<!-- passport -->
+<table>
+	<thead>
+	<th>Type</th>
+	<th>Number</th>
+	<th>Expiry Date</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Passport</td>
+		<td> PO1162833 </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="5"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td>Passport</td>
+		<td> P01162833 </td>
+		<td> - </td>
+		<td> B06 </td>
+		<td> 04 June 2024 </td>
+	</tr>
+	<tr>
+		<td>Passport</td>
+		<td> P0162833 </td>
+		<td> - </td>
+		<td> B07 </td>
+		<td> 28 May 2024 </td>
+	</tr>
+	<tr>
+		<td>Passport</td>
+		<td> P00623549 </td>
+		<td> - </td>
+		<td> C08 </td>
+		<td> 28 May 2024 </td>
+	</tr>
+	<tr>
+		<td>Passport</td>
+		<td> P00128005 </td>
+		<td> - </td>
+		<td> C08 </td>
+		<td> 28 May 2024 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- Emirates Id -->
+<table>
+	<thead>
+	<th>Type</th>
+	<th>Number</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Emirates Id</td>
+		<td> 784-1983-1305758-4 </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="4"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td>Emirates Id</td>
+		<td> 784-1983-1305728-4 </td>
+		<td> B01 </td>
+		<td> 05 April 2018 </td>
+	</tr>
+</tbody>
+</table>
+
+<div class="heading-text">Addresses</div>
+<!-- Address table -->
+<table>
+	<thead>
+	<tr>
+		<th>Address Type</th>
+		<th>Address</th>
+		<th>Arabic Address</th>
+		<th>Emirate</th>
+		<th>P.O. Box</th>
+		<th>Plot No</th>
+		<th>Provider No</th>
+		<th>Date Of Last Update</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Address</td>
+		<td> AL ITTAHAD STREET </td>
+		<td> - </td>
+		<td> 1 </td>
+		<td> 9449 </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="8"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> 1 </td>
+		<td> - </td>
+		<td> 1 </td>
+		<td> 94449 </td>
+		<td> - </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> - </td>
+		<td> - </td>
+		<td> 2 </td>
+		<td> 122 </td>
+		<td> - </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> AJMAN_CITY 1105 4 </td>
+		<td> - </td>
+		<td> 2 </td>
+		<td> 94449 </td>
+		<td> - </td>
+		<td> P03 </td>
+		<td> 02 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> MUSSAFAHNA RAS AL KHAIMA </td>
+		<td> - </td>
+		<td> 5 </td>
+		<td> - </td>
+		<td> - </td>
+		<td> T04 </td>
+		<td> 18 January 2022 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> MOORSAANTE1@HOTMAILCOM0588116632MOHAMMAD BIN ZAYED R </td>
+		<td> - </td>
+		<td> 1 </td>
+		<td> 12345 </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 07 December 2021 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> MOORSAANTE1@HOTMAILCOM0588116632RUMAILAH </td>
+		<td> - </td>
+		<td> 2 </td>
+		<td> 12345 </td>
+		<td> - </td>
+		<td> T04 </td>
+		<td> 19 August 2021 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> AMMAR BIN YASIR ST. </td>
+		<td> - </td>
+		<td> 2 </td>
+		<td> 94449 </td>
+		<td> - </td>
+		<td> T02 </td>
+		<td> 28 December 2019 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> DEIRANA DUBAI </td>
+		<td> - </td>
+		<td> 3 </td>
+		<td> 0 </td>
+		<td> - </td>
+		<td> T04 </td>
+		<td> 09 April 2019 </td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td> - </td>
+		<td> - </td>
+		<td> 6 </td>
+		<td> - </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 27 October 2017 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- contact info details -->
+<div class="heading-text">Contact</div>
+<!-- Email table -->
+<table>
+	<thead>
+	<th>Contact Type</th>
+	<th>Contact</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Email</td>
+		<td> MOAMOHAMED@ADAC.AE </td>
+		<td> P03 </td>
+		<td> 02 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="4"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td> MOORSAANTE1@HOTMAIL.COM </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td> A@YAHOO.COM </td>
+		<td> T02 </td>
+		<td> 09 October 2023 </td>
+	</tr>
+</tbody>
+</table>
+
+
+<!-- Phone table -->
+<table>
+	<thead>
+	<th>Contact Type</th>
+	<th>Contact</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Phone Number</td>
+		<td> 971588116632 </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="4"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td>Phone Number</td>
+		<td> MOORSAANTE1@HOTMAIL.COM </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Phone Number</td>
+		<td> A@YAHOO.COM </td>
+		<td> T02 </td>
+		<td> 09 October 2023 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- Mobile table -->
+<table>
+	<thead>
+	<th>Contact Type</th>
+	<th>Contact</th>
+	<th>Provider No.</th>
+	<th>Date Of Last Update</th>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Mobile Number</td>
+		<td> +971588116632 </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="4"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 971588116632 </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> +971555511012 </td>
+		<td> T02 </td>
+		<td> 24 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 0588116632 </td>
+		<td> P03 </td>
+		<td> 02 July 2024 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 0555511012 </td>
+		<td> C08 </td>
+		<td> 28 May 2024 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 0503542121 </td>
+		<td> T04 </td>
+		<td> 18 January 2022 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 067449962 </td>
+		<td> T04 </td>
+		<td> 11 October 2021 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> +971522000667 </td>
+		<td> T02 </td>
+		<td> 14 January 2020 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> +971588060002 </td>
+		<td> T02 </td>
+		<td> 28 December 2019 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 971555511012 </td>
+		<td> B05 </td>
+		<td> 02 May 2019 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 0568489238 </td>
+		<td> T04 </td>
+		<td> 15 January 2019 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 050 </td>
+		<td> B01 </td>
+		<td> 12 April 2018 </td>
+	</tr>
+	<tr>
+		<td>Mobile Number</td>
+		<td> 971502122464 </td>
+		<td> B05 </td>
+		<td> 07 June 2014 </td>
+	</tr>
+</tbody>
+</table>
+
+
+<!-- Employment Section -->
+<div class="heading-text">Employment</div>
+<!-- employmentType -->
+<table>
+	<thead>
+	<tr class="employment-header">
+		<th>Employment Name</th>
+		<th>Employment Type</th>
+		<th>Gross Annual Income</th>
+		<th>Date of Employment</th>
+		<th>Date of Termination</th>
+		<th>Provider No</th>
+		<th>Date of Last Update</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td> ABU DHABI AIRPORTS COMPANY P S C </td>
+		<td> - </td>
+		<td> 191160 </td>
+		<td> - </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+	<tr>
+		<td colspan="7"><strong>Historical Data</strong></td>
+	</tr>
+	<tr>
+		<td> ABU DHABI AIRPORTS COMPANY P S C </td>
+		<td> - </td>
+		<td> 191160 </td>
+		<td> - </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+	<tr>
+		<td> ABU DHABI AIRPORTS COMPANY P S C </td>
+		<td> - </td>
+		<td> 191160 </td>
+		<td> - </td>
+		<td> - </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+</tbody>
+</table>
+
+<!-- Salary Credits Section -->
+<div class="heading-text">Salary Credits</div>
+
+
+<table>
+	<thead>
+	<tr>
+		<th>No.</th>
+		<th>Account Type</th>
+		<th>Phase</th>
+		<th>IBAN</th>
+		<th>CB Account No</th>
+		<th>DP Account No</th>
+		<th>Provider No</th>
+		<th>Start Date</th>
+		<th>Closed Date</th>
+		<th>Date of Last Update</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td></td>
+		<td> C </td>
+		<td> A </td>
+		<td> *******************9401 </td>
+		<td> Q00092930 </td>
+		<td> 042520113249401 </td>
+		<td> B01 </td>
+		<td> 19 July 2017 </td>
+		<td> - </td>
+		<td> 30 June 2024 </td>
+	</tr>
+	</tbody>
+</table>
+
+<!-- Salary Breakdown Table -->
+
+
+<table>
+	<thead>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>JAN</th>
+		<th>FEB</th>
+		<th>MAR</th>
+		<th>APR</th>
+		<th>MAY</th>
+		<th>JUN</th>
+		<th>JUL</th>
+		<th>AUG</th>
+		<th>SEP</th>
+		<th>OCT</th>
+		<th>NOV</th>
+		<th>DEC</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- 2020 Row -->
+	<tr>
+		<th rowspan="2">  -  </th>
+		<th> Total Salary Amount </th>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+	</tr>
+	<tr>
+		<th>Number Of Salaries Transferred</th>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+	</tr>
+
+	<!-- 2020 Row -->
+	<tr>
+		<th rowspan="2">  -  </th>
+		<th> Total Salary Amount </th>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+	</tr>
+	<tr>
+		<th>Number Of Salaries Transferred</th>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+	</tr>
+
+	<!-- 2020 Row -->
+	<tr>
+		<th rowspan="2">  -  </th>
+		<th> Total Salary Amount </th>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15345 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+	</tr>
+	<tr>
+		<th>Number Of Salaries Transferred</th>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+	</tr>
+
+	<!-- 2020 Row -->
+	<tr>
+		<th rowspan="2">  -  </th>
+		<th> Total Salary Amount </th>
+		<td> 15930 </td>
+		<td> 15655 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15930 </td>
+		<td> 15133 </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<th>Number Of Salaries Transferred</th>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+		<td>  </td>
+	</tr>
+
+	</tbody>
+
+</table>
+
+
+
+
+
+
+
+<!-- Other Income Section -->
+<div class="heading-text">Other Income</div>
+<!-- Other Income -->
+<table>
+	<thead>
+	<tr>
+		<th>Source</th>
+		<th>Gross Annual Income</th>
+		<th>Provider No</th>
+		<th>Date of Last Update</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td> IncomeSourceType </td>
+		<td> 0 </td>
+		<td> B01 </td>
+		<td> 12 July 2024 </td>
+	</tr>
+	<tr>
+		<td> IncomeSourceType </td>
+		<td> 7020 </td>
+		<td> B01 </td>
+		<td> 15 April 2019 </td>
+	</tr>
+	</tbody>
+</table>
+
+<!-- Payment Order Section -->
+<div class="heading-text">Payment Order</div>
+<table class="payment-order-table">
+	<thead>
+	<tr>
+		<th>Type</th>
+		<th>Beneficiary Name</th>
+		<th>IBAN</th>
+		<th>Number</th>
+		<th>Amount</th>
+		<th>Reason</th>
+		<th>Return Date</th>
+		<th>Severity</th>
+		<th>Provider No</th>
+		<th>Reference Date</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100046 </td>
+		<td> 5500 </td>
+		<td> Insufficient Funds </td>
+		<td> 01 February 2024 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 01 February 2024 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100047 </td>
+		<td> 4000 </td>
+		<td> Insufficient Funds </td>
+		<td> 30 January 2023 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 30 January 2023 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100035 </td>
+		<td> 1050 </td>
+		<td> Insufficient Funds </td>
+		<td> 01 August 2021 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 01 August 2021 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100039 </td>
+		<td> 5500 </td>
+		<td> Insufficient Funds </td>
+		<td> 01 February 2023 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 01 February 2023 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100044 </td>
+		<td> 4000 </td>
+		<td> Insufficient Funds </td>
+		<td> 02 March 2023 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 02 March 2023 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100043 </td>
+		<td> 4000 </td>
+		<td> Insufficient Funds </td>
+		<td> 02 February 2023 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 02 February 2023 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100034 </td>
+		<td> 3000 </td>
+		<td> Insufficient Funds </td>
+		<td> 07 May 2022 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 07 May 2022 </td>
+
+	</tr>
+	<tr>
+		<td> Bounced Cheques </td>
+		<td> - </td>
+		<td> *******************9401 </td>
+		<td> 100041 </td>
+		<td> 3000 </td>
+		<td> Insufficient Funds </td>
+		<td> 09 January 2023 </td>
+		<td> - </td>
+		<td> C01 </td>
+		<td> 09 January 2023 </td>
+
+	</tr>
+	</tbody>
+</table>
+
+
+<div class="report-title">Contracts Summary</div>
+<!-- Credit Facilities Section -->
+
+
+<div class="heading-text">Credit Facilities</div>
+<table>
+	<tr>
+		<td class="table-title">No Of Records</td>
+		<td> 6 </td>
+
+	</tr>
+	<tr>
+		<td class="table-title">Total No Of Reporting Data Providers</td>
+		<td> 20 </td>
+	</tr>
+</table>
+
+<!-- Credit Facilities Record Distribution -->
+<table>
+	<thead>
+	<tr>
+		<th>Record Distribution</th>
+		<th>Requested</th>
+		<th>Rejected</th>
+		<th>Not Taken Up</th>
+		<th>Declined</th>
+		<th>Active</th>
+		<th>Closed</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+
+		<td><span class="grey-circle"></span> Instalments</td>
+
+		<td> 6 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 6 </td>
+		<td> 2 </td>
+		<td> 2 </td>
+
+
+	</tr>
+	<tr>
+		<td><span class="grey-circle"></span> Not Instalments</td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 2 </td>
+
+	</tr>
+	<tr>
+		<td><span class="green-circle"></span> Credit Cards</td>
+		<td> 16 </td>
+		<td> 2 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 4 </td>
+		<td> 0 </td>
+	</tr>
+
+	</tbody>
+</table>
+
+<!-- Telco  Utilities Section -->
+<div class="heading-text-1">Telco and Utilities</div>
+
+<table>
+	<tr>
+		<td class="table-title">No Of Records</td>
+		<td> 8 </td>
+	</tr>
+	<tr>
+		<td class="table-title">Total No Of Reporting Data Providers</td>
+		<td> - </td>
+	</tr>
+</table>
+
+<!-- Telco  Utilities Record Distribution -->
+<table>
+	<thead>
+	<tr>
+		<th>Record Distribution</th>
+		<th>Requested</th>
+		<th>Rejected</th>
+		<th>Not Taken Up</th>
+		<th>Declined</th>
+		<th>Active</th>
+		<th>Closed</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><span class="green-circle"></span> Telco</td>
+
+		<td> 1 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 5 </td>
+		<td> 1 </td>
+
+	</tr>
+	<tr>
+		<td><span class="green-circle"></span> Utilities</td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 0 </td>
+		<td> 1 </td>
+		<td> 0 </td>
+	</tr>
+	</tbody>
+</table>
+
+<!-- Total Summary Section -->
+<div class="heading-text-1">Total Summary</div>
+
+<table>
+	<tbody>
+	<tr>
+		<td>Total Exposure</td>
+		<td> 35075 </td>
+	</tr>
+	<tr>
+		<td>Total Exposure for the non-funded facilities</td>
+		<td> 0 </td>
+	</tr>
+	<tr>
+		<td>Credit Utilization Rate On Credit Cards (%)</td>
+		<td> 100 </td>
+	</tr>
+	<tr>
+		<td>Worst Current Payment Delay</td>
+		<td> 5 </td>
+	</tr>
+	<tr>
+		<td>Worst Payment Delay Last 24 Months</td>
+		<td> 5 </td>
+
+	</tr>
+	<tr>
+		<td>Worst Status</td>
+		<td> Service disconnected </td>
+	</tr>
+	<tr>
+		<td>Oldest Contract Start Date</td>
+		<td> 31 October 2017 </td>
+	</tr>
+	<tr>
+		<td>Newest Contract Start Date</td>
+		<td> 14 January 2022 </td>
+	</tr>
+	<tr>
+		<td>Number of Enquiries Last 90 Days</td>
+		<td> 4 </td>
+	</tr>
+	<tr>
+		<td>Total Outstanding Balance of Guaranteed Contracts</td>
+		<td> 0 </td>
+	</tr>
+	<tr>
+		<td>Total Overdue of Guaranteed Contracts</td>
+		<td> 0 </td>
+	</tr>
+	</tbody>
+</table>
+
+<!-- Summary Section -->
+<div class="heading-text">Summary</div>
+<div class="summary-section">
+
+	<!-- Installments Section -->
+	<div class="summary-table-installment">
+		<div class="summary-header">
+			<span class="green"></span>
+			<strong>Installments</strong>
+		</div>
+		<table>
+			<tbody>
+			<tr>
+				<td>No. Of Active Contracts : 1</td>
+				<td>Main and Co-Contract Holder</td>
+				<td>Guarantor</td>
+			</tr>
+			<tr>
+				<td>Total Payment Amount</td>
+				<td> 517 </td>
+				<td> 0 </td>
+
+			</tr>
+			<tr>
+				<td>Total Outstanding Balance Amount</td>
+				<td> 4043 </td>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<td>Total Overdue Amount</td>
+				<td> 0 </td>
+				<td> 0 </td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+<!-- Not Installments Section -->
+<div class="summary-table-notInstallment">
+	<div class="summary-header">
+		<span class="green"></span>
+		<strong>Not Installments</strong>
+	</div>
+	<table>
+		<tbody>
+		<tr>
+			<td>No. Of Active Contracts : 1</td>
+			<td>Main and Co-Contract Holder</td>
+			<td>Guarantor</td>
+		</tr>
+		<tr>
+			<td>Total Credit Limit</td>
+			<td> 0 </td>
+			<td> 0 </td>
+
+		</tr>
+		<tr>
+			<td>Total Outstanding Balance Amount</td>
+			<td> 0 </td>
+			<td> 0 </td>
+		</tr>
+		<tr>
+			<td>Total Overdue Amount</td>
+			<td> 0 </td>
+			<td> 0 </td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- Credit Cards Section -->
+<div class="summary-table-credit">
+	<div class="summary-header">
+		<span class="green"></span>
+		<strong>Credit Cards</strong>
+	</div>
+	<table>
+		<tbody>
+		<tr>
+			<td>No. Of Active Contracts : 1</td>
+			<td>Main and Co-Contract Holder</td>
+			<td>Guarantor</td>
+		</tr>
+		<tr>
+			<td>Total Credit Limit</td>
+			<td> 0 </td>
+			<td> 29500 </td>
+
+		</tr>
+		<tr>
+			<td>Total Outstanding Balance Amount</td>
+			<td> 0 </td>
+			<td> 29512 </td>
+		</tr>
+		<tr>
+			<td>Total Overdue Amount</td>
+			<td> 0 </td>
+			<td> 0 </td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- Telco Section -->
+<div class="summary-table-telco">
+	<div class="summary-header">
+		<span class="red"></span>
+		<strong>Telco</strong>
+	</div>
+	<table>
+		<tbody>
+		<tr>
+			<td>No. Of Active Contracts : 1</td>
+			<td>Main and Co-Contract Holder</td>
+			<td>Guarantor</td>
+		</tr>
+		<tr>
+			<td>Total Outstanding Balance Amount</td>
+			<td> 0 </td>
+			<td> 1532 </td>
+		</tr>
+		<tr>
+			<td>Total Overdue Amount</td>
+			<td> 0 </td>
+			<td> 383 </td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+
+<!-- Consolidated Historical Data Table -->
+<div class="heading-text">Consolidated Historical Data</div>
+<table class="consolidated-table">
+	<thead>
+	<tr>
+		<th>Year</th>
+		<th>JAN</th>
+		<th>FEB</th>
+		<th>MAR</th>
+		<th>APR</th>
+		<th>MAY</th>
+		<th>JUN</th>
+		<th>JUL</th>
+		<th>AUG</th>
+		<th>SEP</th>
+		<th>OCT</th>
+		<th>NOV</th>
+		<th>DEC</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<th>2020</th>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+		<td class="status-yellow"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+	</tr>
+	<tr>
+		<th>2021</th>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+	</tr>
+	<tr>
+		<th>2022</th>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+	</tr>
+	<tr>
+		<th>2023</th>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-green"></td>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+		<td class="status-empty"></td>
+	</tr>
+	</tbody>
+</table>
+
+<!-- Balance to Overdue Ratio and Exposure Overview Section -->
+<div class="balance-exposure-section">
+	<!-- Balance to Overdue Ratio -->
+	<div class="balance-table">
+		<div class="heading-text">Balance to Overdue Ratio</div>
+		<table>
+			<tr>
+				<th>Contract Type</th>
+				<th>Overdue</th>
+				<th>Balance</th>
+			</tr>
+			<tr>
+				<td>Installments (Personal Loan)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Installments (Islamic Credits)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Installments (Mortgage)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Installments (Car Loan)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Installments (Others)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Installments (Total)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Not Installments (Overdraft)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Not Installments (Commercial Credits)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Not Installments (Others)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Not Installments (Total)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Credit Cards (Credit card)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Credit Cards (Covered card)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Credit Cards (Total)</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Telco (Total)</td>
+				<td>2,670</td>
+				<td>2,670</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- Exposure Overview -->
+	<div class="exposure-table">
+		<div class="heading-text">Exposure Overview</div>
+		<table>
+			<tr>
+				<th>Type of Role (Credit Limit / Balance)</th>
+				<th>Enquiring Data Provider</th>
+				<th>All Other Data Providers</th>
+			</tr>
+			<tr>
+				<td>Main and Co-Contract Holder - Credit Limit</td>
+				<td>0</td>
+				<td>10,000</td>
+			</tr>
+			<tr>
+				<td>Main and Co-Contract Holder - Balance</td>
+				<td>0</td>
+				<td>2,670</td>
+			</tr>
+			<tr>
+				<td>Guarantor - Credit Limit</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>Guarantor - Balance</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+
+
+<!-- Credit Facilities Details Section -->
+
+<!-- Start section for Installment Active -->
+
+<div class="credit-facilities-section">
+	<div class="heading-text">Credit Facilities Details</div>
+
+	<!-- active -->
+	<div class="heading-text-1">Active</div>
+	<!-- instalments -->
+	<div class="heading-text-2">Instalments</div>
+
+
+
+
+
+	<table class="instalment-table">
+		<tr>
+			<th>No.</th>
+			<th>Type Of Contract</th>
+			<th>Phase</th>
+			<th>Role</th>
+			<th>Start Date</th>
+			<th>Date Last Updated</th>
+			<th>CB Contract Id</th>
+			<th>DP Contract No</th>
+			<th>Outstanding Balance</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td> Murabaha Buy/sell Auto (Installment) </td>
+			<td> Active </td>
+			<td> Main Contract Holder </td>
+			<td> 10 December 2019 </td>
+			<td> - </td>
+			<td> F19431584 </td>
+			<td> 009MO41193440001 </td>
+			<td> - </td>
+		</tr>
+	</table>
+	<div class="contract-details-container">
+		<table class="contract-details-monthly-data-table">
+			<tr>
+				<th>2020</th>
+				<th>JAN</th>
+				<th>FEB</th>
+				<th>MAR</th>
+				<th>APR</th>
+				<th>MAY</th>
+				<th>JUN</th>
+				<th>JUL</th>
+				<th>AUG</th>
+				<th>SEP</th>
+				<th>OCT</th>
+				<th>NOV</th>
+				<th>DEC</th>
+			</tr>
+			<tr>
+				<td>2021</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td>2022</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td>2023</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td class="status-green">OK</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+				<td>N/A</td>
+			</tr>
+		</table>
+		<div class="heading-text-1">Detail of Instalment 1:  Murabaha Buy/sell Auto (Installment) ,  Active </div>
+		<div class="contract-details-left-section">
+			<div>
+				<table>
+					<tr>
+						<th>CB Contract Id</th>
+						<td> F19431584 </td>
+					</tr>
+					<tr>
+						<th>Provider No</th>
+						<td> B01 </td>
+					</tr>
+					<tr>
+						<th>Type of Contract</th>
+						<td> Murabaha Buy/sell Auto (Installment) </td>
+					</tr>
+					<tr>
+						<th>Phase</th>
+						<td> Active </td>
+					</tr>
+					<tr>
+						<th>Role</th>
+						<td> Main Contract Holder </td>
+					</tr>
+					<tr>
+						<th>Method of Payment</th>
+						<td> - </td>
+					</tr>
+					<tr>
+						<th>Original Currency Code</th>
+						<td> UAE Dirham </td>
+					</tr>
+					<tr>
+						<th>Outstanding Balance</th>
+						<td> - </td>
+					</tr>
+					<tr>
+						<th>Total Amount</th>
+						<td> 37615 </td>
+					</tr>
+					<tr>
+						<th>Total No Of Instalments</th>
+						<td> - </td>
+					</tr>
+					<tr>
+						<th>No Of Remaining Instalments</th>
+						<td> - </td>
+					</tr>
+					<tr>
+						<th>Payments Frequency</th>
+						<td> - </td>
+					</tr>
+					<tr>
+						<th>Payment Amount</th>
+						<td> 517 </td>
+					</tr>
+					<tr>
+						<th>Start Date</th>
+						<td> 10 December 2019 </td>
+					</tr>
+					<tr>
+						<th>Closed Date</th>
+						<td> - </td>
+					</tr>
+					<tr>
+						<th>Islamic Contract Flag</th>
+						<td> Yes </td>
+					</tr>
+					<tr>
+						<th>Secured Contract Flag</th>
+						<td> Yes </td>
+					</tr>
+					<tr>
+						<th>Provider-reported Suspicious Activity</th>
+						<td>No</td>
+					</tr>
+					<tr>
+						<th>Suspicious activity report date</th>
+						<td>-</td>
+					</tr>
+					<tr>
+						<th>Overdue Amount</th>
+						<td>0</td>
+					</tr>
+					<tr>
+						<th>No Of Days Payment Delay</th>
+						<td>0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="contract-details-right-section">
+			<table class="instalment-right-table">
+				<tr>
+					<th>Maximum Overdue Amount</th>
+					<td> 517 </td>
+				</tr>
+				<tr>
+					<th>Maximum Overdue Amount Date</th>
+					<td> 31 January 2023 </td>
+				</tr>
+				<tr>
+					<th>Maximum No Of Days Of Payment Delay</th>
+					<td> 1 </td>
+				</tr>
+				<tr>
+					<th>Maximum No Of Days Of Payment Delay Date</th>
+					<td> 31 January 2023 </td>
+				</tr>
+				<tr>
+					<th>Worst Status</th>
+					<td> - </td>
+				</tr>
+				<tr>
+					<th>Worst Status Date</th>
+					<td> 31 July 2024 </td>
+				</tr>
+			</table>
+			<div class="security-section">
+				<div class="heading-text-2">Security</div>
+				<table class="security-table">
+					<tr>
+						<th>Code</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td> - </td>
+						<td> - </td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+<!-- End of Installment Active Section-->
+
+
+<!-- credit card -->
+
+<!-- Start of Credit Card Active -->
+
+<div class="heading-text-2">Credit cards</div>
+<table>
+	<tr>
+		<th>No.</th>
+		<th>Type of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract ID</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td> CREDIT CARD OUSTANDING </td>
+		<td> Active </td>
+		<td> Main Contract Holder </td>
+		<td> 20 November 2021 </td>
+		<td> - </td>
+		<td> 625589301 </td>
+		<td> 4200031132494000 </td>
+		<td> - </td>
+	</tr>
+</table>
+<!-- Credit card data-->
+<div class="contract-details-container">
+	<!-- Credit Card Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2022</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2023</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="contract-details-left-section">
+		<div class="heading-text-1">Credit Cards 1:  CREDIT CARD OUSTANDING ,  Active </div>
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> 625589301 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> B01 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> CREDIT CARD OUSTANDING </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Active </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Balance</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Credit Limit</th>
+				<td>10,000</td>
+			</tr>
+			<tr>
+				<th>Amount Spent till date</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Of Payment Delay</th>
+				<td> 2 </td>
+			</tr>
+			<tr>
+				<th>Payment Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 20 November 2021 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Card Used Flag</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> Yes </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> No </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Payment Due Date</th>
+				<td>31 July 2023</td>
+			</tr>
+			<tr>
+				<th>Statement Due Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Actual Payment Amount</th>
+				<td>19,173</td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 3585 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 31 January 2023 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 2 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 31 January 2023 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 31 July 2024 </td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="contract-details-right-section">
+		<div class="heading-text-1">Historical Data</div>
+		<table class="contract-details-historical-table">
+			<tr>
+				<th>Year</th>
+				<th>Month</th>
+				<th>Utilization Rate (%)</th>
+				<th>Outstanding Balance</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 07 </td>
+				<td> 101 </td>
+				<td> 25276 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 06 </td>
+				<td> 105 </td>
+				<td> 26253 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 05 </td>
+				<td> 98 </td>
+				<td> 24513 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 04 </td>
+				<td> 107 </td>
+				<td> 26655 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 03 </td>
+				<td> 104 </td>
+				<td> 25887 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 02 </td>
+				<td> 107 </td>
+				<td> 26632 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 01 </td>
+				<td> 102 </td>
+				<td> 25437 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 12 </td>
+				<td> 107 </td>
+				<td> 26748 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 11 </td>
+				<td> 96 </td>
+				<td> 24120 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 10 </td>
+				<td> 93 </td>
+				<td> 23148 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 09 </td>
+				<td> 93 </td>
+				<td> 23319 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 08 </td>
+				<td> 93 </td>
+				<td> 23179 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 07 </td>
+				<td> 93 </td>
+				<td> 23240 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 06 </td>
+				<td> 101 </td>
+				<td> 25342 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 05 </td>
+				<td> 102 </td>
+				<td> 25378 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 04 </td>
+				<td> 95 </td>
+				<td> 23809 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 03 </td>
+				<td> 101 </td>
+				<td> 25187 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 02 </td>
+				<td> 87 </td>
+				<td> 21839 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 01 </td>
+				<td> 83 </td>
+				<td> 20800 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 12 </td>
+				<td> 90 </td>
+				<td> 22477 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 11 </td>
+				<td> 98 </td>
+				<td> 24518 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 10 </td>
+				<td> 95 </td>
+				<td> 23627 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 09 </td>
+				<td> 72 </td>
+				<td> 18020 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 08 </td>
+				<td> 70 </td>
+				<td> 17551 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 07 </td>
+				<td> 54 </td>
+				<td> 13519 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 06 </td>
+				<td> 49 </td>
+				<td> 12221 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 05 </td>
+				<td> 36 </td>
+				<td> 8965 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 04 </td>
+				<td> 20 </td>
+				<td> 4996 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 03 </td>
+				<td> 21 </td>
+				<td> 5294 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 02 </td>
+				<td> 13 </td>
+				<td> 3242 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 01 </td>
+				<td> 32 </td>
+				<td> 8050 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 12 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 11 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 10 </td>
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 09 </td>
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 08 </td>
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+			</tr>
+
+
+		</table>
+	</div>
+</div>
+<table>
+	<tr>
+		<th>No.</th>
+		<th>Type of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract ID</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td> CREDIT CARD OUSTANDING </td>
+		<td> Active </td>
+		<td> Main Contract Holder </td>
+		<td> 20 November 2021 </td>
+		<td> - </td>
+		<td> Q25573141 </td>
+		<td> ************4000 </td>
+		<td> - </td>
+	</tr>
+</table>
+<!-- Credit card data-->
+<div class="contract-details-container">
+	<!-- Credit Card Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2022</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2023</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="contract-details-left-section">
+		<div class="heading-text-1">Credit Cards 2:  CREDIT CARD OUSTANDING ,  Active </div>
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> Q25573141 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> B01 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> CREDIT CARD OUSTANDING </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Active </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Balance</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Credit Limit</th>
+				<td>10,000</td>
+			</tr>
+			<tr>
+				<th>Amount Spent till date</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Of Payment Delay</th>
+				<td> 1 </td>
+			</tr>
+			<tr>
+				<th>Payment Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 20 November 2021 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Card Used Flag</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> Yes </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> No </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Payment Due Date</th>
+				<td>31 July 2023</td>
+			</tr>
+			<tr>
+				<th>Statement Due Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Actual Payment Amount</th>
+				<td>19,173</td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 269 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 31 January 2023 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 1 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 31 January 2023 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 31 July 2024 </td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="contract-details-right-section">
+		<div class="heading-text-1">Historical Data</div>
+		<table class="contract-details-historical-table">
+			<tr>
+				<th>Year</th>
+				<th>Month</th>
+				<th>Utilization Rate (%)</th>
+				<th>Outstanding Balance</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 07 </td>
+				<td> 94 </td>
+				<td> 4236 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 06 </td>
+				<td> 92 </td>
+				<td> 4120 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 05 </td>
+				<td> 91 </td>
+				<td> 4105 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 04 </td>
+				<td> 72 </td>
+				<td> 3238 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 03 </td>
+				<td> 66 </td>
+				<td> 2958 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 02 </td>
+				<td> 100 </td>
+				<td> 4522 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2024 </td>
+				<td> 01 </td>
+				<td> 89 </td>
+				<td> 3996 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 12 </td>
+				<td> 101 </td>
+				<td> 4567 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 11 </td>
+				<td> 90 </td>
+				<td> 4038 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 10 </td>
+				<td> 97 </td>
+				<td> 4374 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 09 </td>
+				<td> 98 </td>
+				<td> 4425 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 08 </td>
+				<td> 70 </td>
+				<td> 3147 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 07 </td>
+				<td> 73 </td>
+				<td> 3292 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 06 </td>
+				<td> 11 </td>
+				<td> 508 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 05 </td>
+				<td> 10 </td>
+				<td> 469 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 04 </td>
+				<td> 32 </td>
+				<td> 1441 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 03 </td>
+				<td> 2 </td>
+				<td> 74 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 02 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2023 </td>
+				<td> 01 </td>
+				<td> 86 </td>
+				<td> 3875 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 12 </td>
+				<td> 103 </td>
+				<td> 4634 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 11 </td>
+				<td> 71 </td>
+				<td> 3195 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 10 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 09 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 08 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 07 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 06 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 05 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 04 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 03 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 02 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2022 </td>
+				<td> 01 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 12 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 11 </td>
+				<td> 0 </td>
+				<td> 0 </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 10 </td>
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 09 </td>
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+			</tr>
+			<tr>
+				<td> 2021 </td>
+				<td> 08 </td>
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+			</tr>
+
+
+		</table>
+	</div>
+</div>
+<!-- End of Credit Card active Section -->
+
+<!-- Start of Closed Installment Section-->
+<div class="heading-text-1">Closed</div>
+<div class="heading-text-2">Instalments</div>
+
+
+<table class="header-table">
+	<tr>
+		<th>No.</th>
+		<th>Type Of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract Id</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td> - </td>
+		<td> Closed </td>
+		<td> Main Contract Holder </td>
+		<td> 21 November 2019 </td>
+		<td> - </td>
+		<td> 319283948 </td>
+		<td> 009MO67193250001 </td>
+		<td> - </td>
+	</tr>
+</table>
+<div class="contract-details-container">
+	<!-- instalment Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2018</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2019</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td>N/A</td>
+			<td class="status-green">OK</td>
+			<td class="status-green">OK</td>
+			<td>N/A</td>
+		</tr>
+	</table>
+	<div class="heading-text-1">Detail of Instalment 1:  - ,  Closed </div>
+	<div class="contract-details-left-section">
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> 319283948 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> B01 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Closed </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Method of Payment</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Outstanding Balance</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Total Amount</th>
+				<td> 300764 </td>
+			</tr>
+			<tr>
+				<th>Total No Of Instalments</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>No Of Remaining Instalments</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Payments Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Payment Amount</th>
+				<td> 6262 </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 21 November 2019 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> 26 May 2024 </td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> Yes </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> No </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Payment Delay</th>
+				<td>0</td>
+			</tr>
+		</table>
+	</div>
+	<div class="contract-details-right-section">
+		<table class="instalment-right-table">
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 47 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 31 January 2023 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 2 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 31 January 2023 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 31 May 2024 </td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- End of Closed Installment Section -->
+
+<!-- Start of Closed credit Card Section -->
+
+
+
+<!-- END of Closed credit card section -->
+
+<!-- Start of telco and utiities Section -->
+<div class="heading-text-2">Telco  Utilities Details</div>
+
+<table>
+	<tr>
+		<th>No.</th>
+		<th>Type of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract ID</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td> Communication Services </td>
+		<td> Active </td>
+		<td> Main Contract Holder </td>
+		<td> 31 October 2017 </td>
+		<td> - </td>
+		<td> Q19587961 </td>
+		<td> - </td>
+		<td> - </td>
+	</tr>
+</table>
+<div class="contract-details-container">
+	<!-- Credit Card Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2018</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2019</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">OK</td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="contract-details-left-section">
+		<div class="heading-text-1">Credit Cards 1: Credit Card, Closed</div>
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> Q19587961 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> T02 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> Communication Services </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Active </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Balance</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Credit Limit</th>
+				<td>35,000</td>
+			</tr>
+			<tr>
+				<th>Amount Spent till date</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Of Payment Delay</th>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<th>Payment Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 31 October 2017 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Card Used Flag</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Payment Due Date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Statement Due Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Actual Payment Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 30 September 2020 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 30 September 2020 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 30 September 2020 </td>
+			</tr>
+		</table>
+</div>
+</div>
+<div class="heading-text-2">Telco  Utilities Details</div>
+
+<table>
+	<tr>
+		<th>No.</th>
+		<th>Type of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract ID</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td> Communication Services </td>
+		<td> Active </td>
+		<td> Main Contract Holder </td>
+		<td> 01 October 2018 </td>
+		<td> - </td>
+		<td> O19620385 </td>
+		<td> - </td>
+		<td> - </td>
+	</tr>
+</table>
+<div class="contract-details-container">
+	<!-- Credit Card Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2018</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2019</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">OK</td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="contract-details-left-section">
+		<div class="heading-text-1">Credit Cards 1: Credit Card, Closed</div>
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> O19620385 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> T02 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> Communication Services </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Active </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Balance</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Credit Limit</th>
+				<td>35,000</td>
+			</tr>
+			<tr>
+				<th>Amount Spent till date</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Of Payment Delay</th>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<th>Payment Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 01 October 2018 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Card Used Flag</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Payment Due Date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Statement Due Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Actual Payment Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 30 September 2020 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 0 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 30 September 2020 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 30 September 2020 </td>
+			</tr>
+		</table>
+</div>
+</div>
+<div class="heading-text-2">Telco  Utilities Details</div>
+
+<table>
+	<tr>
+		<th>No.</th>
+		<th>Type of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract ID</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td> Communication Services </td>
+		<td> Active </td>
+		<td> Main Contract Holder </td>
+		<td> 04 January 2022 </td>
+		<td> - </td>
+		<td> N28459988 </td>
+		<td> - </td>
+		<td> - </td>
+	</tr>
+</table>
+<div class="contract-details-container">
+	<!-- Credit Card Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2018</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2019</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">OK</td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="contract-details-left-section">
+		<div class="heading-text-1">Credit Cards 1: Credit Card, Closed</div>
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> N28459988 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> T02 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> Communication Services </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Active </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Balance</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Credit Limit</th>
+				<td>35,000</td>
+			</tr>
+			<tr>
+				<th>Amount Spent till date</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Of Payment Delay</th>
+				<td> 5 </td>
+			</tr>
+			<tr>
+				<th>Payment Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 04 January 2022 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Card Used Flag</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Payment Due Date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Statement Due Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Actual Payment Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 383 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 30 June 2024 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 5 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 30 June 2024 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> Service disconnected </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 30 June 2024 </td>
+			</tr>
+		</table>
+</div>
+</div>
+<div class="heading-text-2">Telco  Utilities Details</div>
+
+<table>
+	<tr>
+		<th>No.</th>
+		<th>Type of Contract</th>
+		<th>Phase</th>
+		<th>Role</th>
+		<th>Start Date</th>
+		<th>Date Last Updated</th>
+		<th>CB Contract ID</th>
+		<th>DP Contract No</th>
+		<th>Outstanding Balance</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td> Communication Services </td>
+		<td> Active </td>
+		<td> Main Contract Holder </td>
+		<td> 14 January 2022 </td>
+		<td> - </td>
+		<td> 226540840 </td>
+		<td> - </td>
+		<td> - </td>
+	</tr>
+</table>
+<div class="contract-details-container">
+	<!-- Credit Card Monthly Data -->
+	<table class="contract-details-monthly-data-table">
+		<tr>
+			<th>Year</th>
+			<th>JAN</th>
+			<th>FEB</th>
+			<th>MAR</th>
+			<th>APR</th>
+			<th>MAY</th>
+			<th>JUN</th>
+			<th>JUL</th>
+			<th>AUG</th>
+			<th>SEP</th>
+			<th>OCT</th>
+			<th>NOV</th>
+			<th>DEC</th>
+		</tr>
+		<tr>
+			<td>2018</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2019</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2020</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td>2021</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td>N/A</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">MIN</td>
+			<td class="status-green">OK</td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="contract-details-left-section">
+		<div class="heading-text-1">Credit Cards 1: Credit Card, Closed</div>
+		<table class="contract-details-table">
+			<tr>
+				<th>CB Contract Id</th>
+				<td> 226540840 </td>
+			</tr>
+			<tr>
+				<th>Provider No</th>
+				<td> T02 </td>
+			</tr>
+			<tr>
+				<th>Type of Contract</th>
+				<td> Communication Services </td>
+			</tr>
+			<tr>
+				<th>Phase</th>
+				<td> Active </td>
+			</tr>
+			<tr>
+				<th>Role</th>
+				<td> Main Contract Holder </td>
+			</tr>
+			<tr>
+				<th>Original Currency Code</th>
+				<td> UAE Dirham </td>
+			</tr>
+			<tr>
+				<th>Balance</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Credit Limit</th>
+				<td>35,000</td>
+			</tr>
+			<tr>
+				<th>Amount Spent till date</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>Overdue Amount</th>
+				<td>0</td>
+			</tr>
+			<tr>
+				<th>No Of Days Of Payment Delay</th>
+				<td> 1 </td>
+			</tr>
+			<tr>
+				<th>Payment Frequency</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Start Date</th>
+				<td> 14 January 2022 </td>
+			</tr>
+			<tr>
+				<th>Closed Date</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Card Used Flag</th>
+				<td>No</td>
+			</tr>
+			<tr>
+				<th>Islamic Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Secured Contract Flag</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Provider-reported Suspicious Activity</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Suspicious activity report date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Payment Due Date</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Statement Due Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Actual Payment Amount</th>
+				<td>-</td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount</th>
+				<td> 624 </td>
+			</tr>
+			<tr>
+				<th>Maximum Overdue Amount Date</th>
+				<td> 31 December 2022 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay</th>
+				<td> 1 </td>
+			</tr>
+			<tr>
+				<th>Maximum No Of Days Of Payment Delay Date</th>
+				<td> 31 December 2022 </td>
+			</tr>
+			<tr>
+				<th>Worst Status</th>
+				<td> - </td>
+			</tr>
+			<tr>
+				<th>Worst Status Date</th>
+				<td> 31 December 2022 </td>
+			</tr>
+		</table>
+</div>
+</div>
+
+
+
+<!-- End of telco and Utilities Section -->
+
+</div>
+
+<!-- Applications Section -->
+<div class="application-details-section">
+	<div class="report-title">APPLICATIONS</div>
+	<div class="heading-text">Applications</div>
+	<table>
+		<thead>
+		<tr>
+			<th>CB Allocation</th>
+			<th>Provider No</th>
+			<th>Type of Contract</th>
+			<th>Phase</th>
+			<th>Role</th>
+			<th>Enquiry Date</th>
+			<th>Date Of Last Updated</th>
+			<th>Total Amount</th>
+			<th>Number of Instalments</th>
+			<th>Credit Limit</th>
+			<th>Links</th>
+			<th>Provider-reported Suspicious activity</th>
+			<th>Suspicious Activity report date</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td> I35956249 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 04 June 2024 </td>
+			<td> 04 June 2024 </td>
+			<td> 500000 </td>
+			<td> 48 </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> M31115069 </td>
+			<td> 10107172-12085198-1 </td>
+			<td> - </td>
+			<td> Declined </td>
+			<td> Main Contract Holder </td>
+			<td> 06 June 2023 </td>
+			<td> 26 June 2023 </td>
+			<td> 250000 </td>
+			<td> 48 </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> 235207710 </td>
+			<td> 11540291-13525543-1 </td>
+			<td> - </td>
+			<td> Declined </td>
+			<td> Main Contract Holder </td>
+			<td> 13 April 2024 </td>
+			<td> 13 June 2024 </td>
+			<td> 150000 </td>
+			<td> 12 </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> I35420319 </td>
+			<td> 11647988-13633389-2 </td>
+			<td> - </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 04 May 2024 </td>
+			<td> 04 May 2024 </td>
+			<td> 100000 </td>
+			<td> 48 </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> 035822832 </td>
+			<td> 11768067-13755221-1 </td>
+			<td> - </td>
+			<td> Declined </td>
+			<td> Main Contract Holder </td>
+			<td> 26 May 2024 </td>
+			<td> 27 June 2024 </td>
+			<td> 50000 </td>
+			<td> 48 </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> F35902074 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 28 May 2024 </td>
+			<td> 28 May 2024 </td>
+			<td> 50000 </td>
+			<td> 48 </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> K32027893 </td>
+			<td> - </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 22 August 2023 </td>
+			<td> 22 August 2023 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 12430 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> 731819608 </td>
+			<td> - </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Rejected </td>
+			<td> Main Contract Holder </td>
+			<td> 07 August 2023 </td>
+			<td> 10 September 2023 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 30000 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> Q25515391 </td>
+			<td> 8112377-10020146-1 </td>
+			<td> - </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 20 November 2021 </td>
+			<td> 20 November 2021 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 29000 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> R25510121 </td>
+			<td> 8112398-10020199-1 </td>
+			<td> - </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 21 November 2021 </td>
+			<td> 21 November 2021 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 4500 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> Q30136291 </td>
+			<td> 9781876 </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 14 March 2023 </td>
+			<td> 14 March 2023 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 15345 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> K27238953 </td>
+			<td> - </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 20 June 2022 </td>
+			<td> 20 June 2022 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 10000 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> K29894483 </td>
+			<td> - </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 21 February 2023 </td>
+			<td> 21 February 2023 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 100000 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> 331515018 </td>
+			<td> - </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 16 July 2023 </td>
+			<td> 16 July 2023 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 100000 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> 032817112 </td>
+			<td> - </td>
+			<td> CREDIT CARD OUSTANDING </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 18 October 2023 </td>
+			<td> 18 October 2023 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> 5000 </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		<tr>
+			<td> F25048574 </td>
+			<td> - </td>
+			<td> Communication Services </td>
+			<td> Requested </td>
+			<td> Main Contract Holder </td>
+			<td> 18 September 2021 </td>
+			<td> 18 September 2021 </td>
+			<td> - </td>
+			<td> - </td>
+			<td> - </td>
+			<td>-</td>
+			<td> - </td>
+			<td> - </td>
+
+
+
+		</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+</div>
+
+</body>
 </html>
