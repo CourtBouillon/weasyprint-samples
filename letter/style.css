@@ -72,7 +72,9 @@ textarea {
 }
 
 input, textarea {
+  border: none;
   display: block;
+  width: 100%;
 }
 
 input::before, textarea::before, textarea::after {
