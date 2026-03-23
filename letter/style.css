@@ -1,3 +1,5 @@
+/* Fonts */
+
 @font-face {
   font-family: "pacifico";
   src: url("fonts/Pacifico-Regular.ttf") format('truetype');
@@ -8,27 +10,41 @@
   src: url("fonts/ComingSoon-Regular.ttf") format('truetype');
 }
 
+
+/* Page rule */
+
 @page {
   margin: 0;
-  size: A4;
 }
+
+
+/* Style */
 
 body {
   font-family: "soon";
   margin: 0;
+
+  > div {
+    margin: 0 auto;
+    padding: 0 12mm;
+
+    &:first-of-type, &:last-of-type {
+      margin: 2cm 0 1cm 0;
+    }
+  }
 }
 
 header {
   background: no-repeat top left / 125% url('img/image-couleurs.png');
-}
 
-header div {
-  height: 3cm;
-  padding: 5mm 5mm 12mm 5mm;
-}
+  div {
+    height: 3cm;
+    padding: 5mm 5mm 12mm 5mm;
+  }
 
-header img {
-  width: 5cm;
+  img {
+    width: 5cm;
+  }
 }
 
 hr {
@@ -43,14 +59,6 @@ p {
   margin-top: 5mm;
 }
 
-body > div {
-  margin: 0 auto;
-  padding: 0 12mm;
-}
-
-body > div:first-of-type, body > div:last-of-type {
-  margin: 2cm 0 1cm 0;
-}
 
 label {
   display: block;
@@ -77,7 +85,9 @@ input, textarea {
   width: 100%;
 }
 
-input::before, textarea::before, textarea::after {
+input::before,
+textarea::before,
+textarea::after {
   content: leader(dotted);
   display: block;
 }
