@@ -1,3 +1,5 @@
+/* Fonts */
+
 @font-face {
   font-family: Libre Barcode;
   src: url(librebarcode128-regular.ttf);
@@ -17,24 +19,40 @@
   src: url(barlowcondensed-bold.otf);
 }
 
+
+/* Colors */
+
+:root {
+  --black: #2A3239;
+  --grey: #eef1f5;
+  --white: #fff;
+}
+
+
+/* Page rules */
+
 @page {
   margin: 0;
   size: landscape;
 }
 
+
+/* Style */
+
 html {
   align-content: center;
   align-items: center;
-  background: #eef1f5;
+  background: var(--grey);
   display: flex;
   font-family: Barlow Condensed, sans-serif;
   height: 100%;
   justify-content: center;
 }
+
 body {
-  background: #fff;
+  background: var(--white);
   box-sizing: border-box;
-  color: #2A3239;
+  color: var(--black);
   display: flex;
   flex-wrap: wrap;
   height: 8cm;
@@ -50,100 +68,118 @@ section {
 dl {
   columns: 4;
   text-align: center;
+
+  dt {
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin-left: 0;
+  }
 }
-dt {
-  font-size: 9pt;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-dd {
-  margin-left: 0;
-}
+
 ul {
   align-items: center;
   display: flex;
   list-style: none;
   margin: 0;
   padding-left: 0;
-}
-li {
-  font-weight: 700;
-  text-transform: uppercase;
+
+  li {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 }
 
 #informations {
   flex: 1;
   padding: 0;
   position: relative;
-}
-#informations h1 {
-  display: inline-block;
-  font-size: 25pt;
-  font-weight: 300;
-  text-transform: uppercase;
-}
-#informations #name {
-  margin-left: 1cm;
-}
-#informations #destination {
-  position: absolute;
-  right: 1cm;
-}
-#informations dl {
-  background: #2A3239;
-  color: #fff;
-  margin: 0;
-  padding: 1cm 0;
-}
-#informations dd {
-  border-left: 1pt solid #fff;
-  font-size: 35pt;
-}
-#informations dd:first-of-type {
-  border-left: 0;
-}
-#informations ul {
-  margin-left: 1cm;
-}
-#informations li {
-  font-weight: 300;
-  padding: 0.15cm;
-}
-#informations li:first-of-type {
-  background: #2A3239;
-  border-radius: 4pt;
-  color: #fff;
-}
-#informations li:last-of-type {
-  font-family: Libre Barcode, cursive;
-  font-size: 25pt;
-  margin-left: auto;
-  padding-right: 1cm;
-  padding-top: 0.5cm;
+
+  h1 {
+    display: inline-block;
+    font-size: 25pt;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  #name {
+    margin-left: 1cm;
+  }
+
+  #destination {
+    position: absolute;
+    right: 1cm;
+  }
+
+  dl {
+    background: var(--black);
+    color: var(--white);
+    margin: 0;
+    padding: 1cm 0;
+
+    dd {
+      border-left: 1pt solid var(--white);
+      font-size: 35pt;
+
+      &:first-of-type {
+        border-left: 0;
+      }
+    }
+  }
+
+  ul {
+    margin-left: 1cm;
+
+    li {
+      font-weight: 300;
+      padding: 0.15cm;
+
+      &:first-of-type {
+        background: var(--black);
+        border-radius: 4pt;
+        color: var(--white);
+      }
+
+      &:last-of-type {
+        font-family: Libre Barcode, cursive;
+        font-size: 25pt;
+        margin-left: auto;
+        padding-right: 1cm;
+        padding-top: 0.5cm;
+      }
+    }
+  }
 }
 
 #ticket {
-  border-left: 1pt dashed #2A3239;
+  border-left: 1pt dashed var(--black);
   display: flex;
   flex-direction: column;
   height: 8cm;
   justify-content: space-around;
   padding: 0 1cm;
-}
-#ticket h2 {
-  font-weight: 300;
-  margin: 0;
-  text-transform: uppercase;
-}
-#ticket p {
-  font-family: Libre Barcode, cursive;
-  font-size: 25pt;
-  margin: 0;
-  text-align: center;
-}
-#ticket dl {
-  margin: 0;
-}
-#ticket li {
-  margin: 0 0.25cm;
+
+  h2 {
+    font-weight: 300;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-family: Libre Barcode, cursive;
+    font-size: 25pt;
+    margin: 0;
+    text-align: center;
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  li {
+    margin: 0 0.25cm;
+  }
 }
