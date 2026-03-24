@@ -1,44 +1,56 @@
+/* Fonts */
+
 @font-face {
   font-family: SourceSerifPro;
   src: url("fonts/SourceSerifPro-Regular.ttf") format('truetype');
 }
+
+
+/* Page rules */
+
 @page {
   size: 110mm 170mm;
 }
+
 @page :left {
   margin: 20mm 10mm 12mm 15mm;
   @top-left { content: counter(page) }
   @top-right { content: string(heading); font-variant: small-caps }
 }
+
 @page :right {
   margin: 20mm 15mm 12mm 10mm;
   @top-left { content: string(heading); font-variant: small-caps }
   @top-right { content: counter(page) }
 }
+
 @page :blank {
   @top-right { content: none }
   @top-left { content: none }
 }
+
 @page clean {
   @top-right { content: none }
   @top-left { content: none }
 }
 
-img {
-  display: none;
-}
+
+/* Style */
 
 html {
   font-family: SourceSerifPro;
   font-size: 10pt;
 }
+
 body {
   margin: 0;
 }
+
 section {
   break-after: right;
   padding-top: 25mm;
 }
+
 aside {
   display: none;
 }
@@ -50,6 +62,7 @@ h1 {
   margin: 3em 0;
   page: clean;
 }
+
 h2 {
   font-size: 1em;
   font-variant: small-caps;
@@ -59,15 +72,22 @@ h2 {
   string-set: heading content();
   text-align: center;
 }
+
+img {
+  display: none;
+}
+
 p {
   hyphens: auto;
   margin: 0;
   text-align: justify;
   text-indent: 1em;
 }
+
 dd {
   margin: 0 0 0 1em;
 }
+
 br::after {
   content: '';
   display: inline-block;
@@ -76,32 +96,38 @@ br::after {
 
 #authors {
   page: clean;
-}
-#authors p {
-  text-indent: 0;
+
+  p {
+    text-indent: 0;
+  }
 }
 
 #contents {
   page: clean;
-}
-#contents p {
-  margin: 2em 0;
-  text-indent: 0;
-}
-#contents ul {
-  display: block;
-  margin: 1em 0;
-  padding: 0;
-}
-#contents li {
-  display: block;
-}
-#contents a {
-  color: inherit;
-  text-decoration: none;
-}
-#contents a::before {
-  content: target-text(attr(href)) ' ' leader('.') ' ' target-counter(attr(href), page);
+
+  p {
+    margin: 2em 0;
+    text-indent: 0;
+  }
+
+  ul {
+    display: block;
+    margin: 1em 0;
+    padding: 0;
+
+    li {
+      display: block;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &::before {
+      content: target-text(attr(href)) ' ' leader('.') ' ' target-counter(attr(href), page);
+    }
+  }
 }
 
 .fullpage {
