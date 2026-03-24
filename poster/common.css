@@ -1,7 +1,12 @@
+/* Fonts */
+
 @font-face {
   font-family: ArchivoBlack;
   src: url(archivoblack-regular.ttf);
 }
+
+
+/* Style */
 
 html {
   background: url(background.jpg);
@@ -25,12 +30,14 @@ html {
   border: 4px solid white;
   padding-top: 0.5cm;
   padding-bottom: 0.5cm;
-}
-#date article {
-  display: inline-block;
-}
-#date article p {
-  margin: 0;
+
+  article {
+    display: inline-block;
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
 #sponsors ul {
@@ -40,9 +47,10 @@ html {
   justify-content: center;
   list-style: none;
   padding: 0;
-}
-#sponsors li {
-  margin: 0 1em;
+
+  li {
+    margin: 0 1em;
+  }
 }
 
 #address {

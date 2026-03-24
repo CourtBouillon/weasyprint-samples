@@ -1,13 +1,19 @@
+/* Fonts */
+
 @font-face {
   font-family: OpenDyslexic;
   font-weight: bold;
   src: url(fonts/OpenDyslexic-Bold.otf);
 }
+
 @font-face {
   font-family: OpenDyslexic;
   font-weight: normal;
   src: url(fonts/OpenDyslexic-Regular.otf);
 }
+
+
+/* Page rules */
 
 @page {
   margin: 2cm 2cm 3cm 2cm;
@@ -73,11 +79,15 @@
   }
 }
 
+
+/* Style */
+
 html {
   counter-reset: h2-counter;
   font-family: OpenDyslexic;
   font-size: 10pt;
 }
+
 body {
   margin: 0;
 }
@@ -86,6 +96,7 @@ p {
   line-height: 2;
   text-align: justify;
 }
+
 img {
   display: block;
   margin: 2em auto;
@@ -96,6 +107,7 @@ h1 {
   position: absolute;
   visibility: hidden;
 }
+
 h2 {
   color: white;
   counter-increment: h2-counter;
@@ -108,13 +120,14 @@ h2 {
   margin: 0;
   string-set: heading content();
   text-align: center;
-}
-h2::before {
-  content: "Chapitre " counter(h2-counter) " ";
-  display: block;
-  font-size: 1.2rem;
-  font-weight: normal;
-  line-height: 1;
+
+  &::before {
+    content: "Chapitre " counter(h2-counter) " ";
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+    line-height: 1;
+  }
 }
 
 section {
@@ -124,18 +137,20 @@ section {
 aside {
   display: flex;
   justify-content: center;
-}
-aside figure {
-  flex: none;
-  margin: 0;
-  padding: 1em;
-  text-align: center;
-}
-aside img {
-  border: 0.4mm solid white;
-  border-radius: 50%;
-  margin: 0 auto;
-  max-width: 14mm;
+
+  figure {
+    flex: none;
+    margin: 0;
+    padding: 1em;
+    text-align: center;
+  }
+
+  img {
+    border: 0.4mm solid white;
+    border-radius: 50%;
+    margin: 0 auto;
+    max-width: 14mm;
+  }
 }
 
 .character {
@@ -148,57 +163,68 @@ aside img {
   padding-top: 10em;
   page: clean;
   text-align: center;
-}
-#authors img {
-  display: block;
-  margin: auto;
-  width: 75%;
-}
-#authors p {
-  font-size: 1.3em;
-  margin: 5em 0 1em;
-  text-align: center;
-}
-#authors dl {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-#authors dt {
-  display: block;
-  font-size: 0.8em;
-  line-height: 2rem;
-  width: 100%;
-}
-#authors dd {
-  margin: 0 0.5em;
-  padding: 0;
+
+  img {
+    display: block;
+    margin: auto;
+    width: 75%;
+  }
+
+  p {
+    font-size: 1.3em;
+    margin: 5em 0 1em;
+    text-align: center;
+  }
+
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    dt {
+      display: block;
+      font-size: 0.8em;
+      line-height: 2rem;
+      width: 100%;
+    }
+
+    dd {
+      margin: 0 0.5em;
+      padding: 0;
+    }
+  }
 }
 
 #contents {
   page: clean;
-}
-#contents p {
-  font-size: 2em;
-}
-#contents ul {
-  display: block;
-  margin: 1em 0;
-  padding: 0;
-}
-#contents li {
-  display: block;
-}
-#contents a {
-  color: inherit;
-  text-decoration: none;
-}
-#contents a::before {
-  content: target-counter(attr(href), h2-counter) '. ' target-text(attr(href));
-}
-#contents a::after {
-  content: target-counter(attr(href), page);
-  float: right;
+
+  p {
+    font-size: 2em;
+  }
+
+  ul {
+    display: block;
+    margin: 1em 0;
+    padding: 0;
+
+    li {
+      display: block;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &::before {
+      content: target-counter(attr(href), h2-counter) '. ' target-text(attr(href));
+    }
+
+    &::after {
+      content: target-counter(attr(href), page);
+      float: right;
+    }
+  }
 }
 
 .chapitre::before {
@@ -213,15 +239,19 @@ aside img {
   width: 168mm;
   z-index: -1;
 }
+
 #chapitre-1::before {
   background-image: url("img/couv1.jpg");
 }
+
 #chapitre-2::before {
   background-image: url("img/couv2.jpg");
 }
+
 #chapitre-3::before {
   background-image: url("img/couv3.jpg");
 }
+
 #chapitre-4::before {
   background-image: url("img/couv4.jpg");
 }
@@ -241,18 +271,20 @@ aside img {
 
 .fullpage {
   page: full;
-}
-.fullpage img {
-  bottom: 0;
-  height: 210mm;
-  left: 0;
-  margin: 0;
-  max-width: none;
-  object-fit: cover;
-  position: absolute;
-  width: 148mm;
-  z-index: 1;
-}
-.fullpage:last-child {
-  break-before: left;
+
+  img {
+    bottom: 0;
+    height: 210mm;
+    left: 0;
+    margin: 0;
+    max-width: none;
+    object-fit: cover;
+    position: absolute;
+    width: 148mm;
+    z-index: 1;
+  }
+
+  &:last-child {
+    break-before: left;
+  }
 }
